@@ -1,0 +1,47 @@
+{
+  "name": "Camille D.",
+  "title": "Chargée de recrutement · Tech",
+  "contact": {
+    "email": "camille@exemple.fr",
+    "city": "Paris",
+    "linkedin": "linkedin.com/in/camille-d"
+  },
+  "summary": "Chargée de recrutement avec deux ans d'expérience sur des profils tech (développeurs, data, produit). À l'aise sur le sourcing LinkedIn, l'entretien structuré et le pilotage du process candidat. Cherche un poste où structurer un recrutement IT de bout en bout, en environnement hybride.",
+  "tailoredFor": "Chargé de recrutement IT",
+  "experiences": [
+    {
+      "role": "Chargée de recrutement",
+      "company": "Skillr (ESN)",
+      "period": "2024 — 2026",
+      "bullets": [
+        "Géré plus de 30 recrutements tech par an, du brief au closing",
+        "Réduit le délai moyen de recrutement de 45 à 32 jours",
+        "Construit un vivier de 600 profils via sourcing LinkedIn Recruiter",
+        "Atteint un taux de transformation entretien → offre de 22%"
+      ]
+    },
+    {
+      "role": "Assistante recrutement (alternance)",
+      "company": "Cabinet Orveau",
+      "period": "2022 — 2024",
+      "bullets": [
+        "Présélectionné près de 1 200 candidatures par an",
+        "Mis en place un suivi d'expérience candidat (NPS 4,6/5)"
+      ]
+    }
+  ],
+  "skills": [
+    "Sourcing LinkedIn Recruiter",
+    "Entretien structuré",
+    "ATS (Lever, Welcome Kit)",
+    "Recrutement tech",
+    "Marque employeur",
+    "Boolean search"
+  ],
+  "education": [
+    { "title": "Master Management des RH", "school": "IGS-RH Paris", "year": "2024" },
+    { "title": "Licence Gestion", "school": "Université Paris-Nanterre", "year": "2022" }
+  ],
+  "languages": ["Français (natif)", "Anglais (courant)"],
+  "pages": 1
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Sacha O.",
+  "title": "Growth & Acquisition · Marketing digital",
+  "contact": {
+    "email": "sacha@exemple.fr",
+    "city": "Paris",
+    "linkedin": "linkedin.com/in/sacha-o"
+  },
+  "summary": "Profil growth avec six ans en acquisition, du paid au CRM. Pilote des budgets média à six chiffres avec une culture data et test-and-learn. Cherche à prendre la responsabilité d'un canal d'acquisition de bout en bout dans une scale-up.",
+  "tailoredFor": "Growth Manager",
+  "experiences": [
+    {
+      "role": "Growth Marketer",
+      "company": "Pelio (SaaS B2B)",
+      "period": "2022 — 2026",
+      "bullets": [
+        "Piloté 1,2 M€ de budget paid annuel (Google, Meta, LinkedIn)",
+        "Réduit le coût d'acquisition de 28% en 18 mois",
+        "Industrialisé plus de 40 A/B tests par trimestre",
+        "Augmenté de 35% les leads qualifiés via la refonte du funnel"
+      ]
+    },
+    {
+      "role": "Chef de projet acquisition",
+      "company": "Klimt Media",
+      "period": "2020 — 2022",
+      "bullets": [
+        "Porté le ROAS de 2,1 à 3,4 sur le portefeuille clients",
+        "Automatisé le reporting de campagnes (Looker Studio)"
+      ]
+    },
+    {
+      "role": "Traffic Manager",
+      "company": "Bloomé",
+      "period": "2019 — 2020",
+      "bullets": [
+        "Géré les campagnes SEA (300 K€ par an)",
+        "Augmenté de 50% le trafic organique via une refonte SEO"
+      ]
+    }
+  ],
+  "skills": [
+    "Google Ads / Meta Ads",
+    "SEA / SEO",
+    "CRM (HubSpot)",
+    "Analytics (GA4, Looker)",
+    "A/B testing",
+    "Marketing automation"
+  ],
+  "education": [
+    { "title": "Master Marketing digital", "school": "EM Lyon", "year": "2019" },
+    { "title": "Bachelor Marketing", "school": "INSEEC", "year": "2017" }
+  ],
+  "languages": ["Français (natif)", "Anglais (courant)", "Espagnol (intermédiaire)"],
+  "pages": 1
+}

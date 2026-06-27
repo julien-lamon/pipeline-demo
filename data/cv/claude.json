@@ -1,0 +1,67 @@
+{
+  "name": "Claude R.",
+  "title": "Directeur administratif et financier",
+  "contact": {
+    "email": "claude@exemple.fr",
+    "city": "Paris",
+    "linkedin": "linkedin.com/in/claude-r"
+  },
+  "summary": "Plus de douze ans en finance d'entreprise, du contrôle de gestion à la direction financière, en ETI industrielles et de distribution. Pilotage de clôtures multi-filiales, optimisation du BFR et conduite de projets de financement et d'ERP. Vise une direction financière complète dans une ETI en croissance.",
+  "tailoredFor": "Directeur Administratif et Financier",
+  "experiences": [
+    {
+      "role": "Directeur financier adjoint",
+      "company": "Sartène Industries (ETI, 320 M€ de CA)",
+      "period": "2019 — 2026",
+      "bullets": [
+        "Piloté la clôture mensuelle de 6 filiales en J+5",
+        "Réduit le BFR de 12 jours, soit 8 M€ de trésorerie libérée",
+        "Conduit le refinancement de la dette groupe (45 M€)",
+        "Déployé un ERP (SAP) sur 3 sites en 14 mois"
+      ]
+    },
+    {
+      "role": "Responsable du contrôle de gestion",
+      "company": "Maïa Retail",
+      "period": "2014 — 2019",
+      "bullets": [
+        "Structuré le reporting groupe sur 12 business units",
+        "Construit et défendu le budget annuel (180 M€)",
+        "Amélioré la marge brute de 2,3 points en 3 ans"
+      ]
+    },
+    {
+      "role": "Contrôleur de gestion senior",
+      "company": "Helia Santé",
+      "period": "2011 — 2014",
+      "bullets": [
+        "Mis en place les tableaux de bord opérationnels par activité",
+        "Automatisé les prévisions de trésorerie à 13 semaines"
+      ]
+    },
+    {
+      "role": "Auditeur financier",
+      "company": "Cabinet Forvell",
+      "period": "2009 — 2011",
+      "bullets": [
+        "Audité plus de 15 mandats par an (PME et ETI)",
+        "Co-piloté 3 due diligences d'acquisition"
+      ]
+    }
+  ],
+  "skills": [
+    "Direction financière",
+    "Contrôle de gestion",
+    "Consolidation (IFRS)",
+    "Trésorerie / BFR",
+    "ERP (SAP, Oracle)",
+    "Financement / dette",
+    "Management d'équipe (10+)"
+  ],
+  "education": [
+    { "title": "DSCG", "school": "INTEC Paris", "year": "2009" },
+    { "title": "Master CCA", "school": "IAE Lyon", "year": "2007" }
+  ],
+  "languages": ["Français (natif)", "Anglais (professionnel)"],
+  "pages": 2
+}

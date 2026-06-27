@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# job-pipeline-demo
 
-## Getting Started
+Démo web vitrine du projet **job-pipeline** : elle fait comprendre, en moins de
+trois minutes et sans inscription, le funnel **veille scorée → coaching ciblé →
+CV taillé pour l'offre**.
 
-First, run the development server:
+> ⚠️ **Données 100% fictives et figées.** Cette démo n'appelle **aucune IA**, ne
+> contient **aucun secret** et ne fait **aucun appel réseau externe**. Les trois
+> personas, leurs offres et leurs CV sont inventés. Le coaching *live* (vrai
+> modèle, relais serveur, génération réelle de CV) fera l'objet d'une version
+> ultérieure et n'est pas inclus ici.
+
+## Stack
+
+- [Next.js](https://nextjs.org) 16 (App Router) + TypeScript
+- Tailwind CSS v4
+- Déployable sur Vercel en zéro-config
+
+## Lancer la démo en local
 
 ```bash
+npm install   # déjà fait si le repo a été scaffoldé localement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Puis ouvrir **http://localhost:3000**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Parcours (5 écrans)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Accueil** (`/`) — pitch + choix d'un des 3 profils à incarner.
+2. **Offres scorées** (`/p/[persona]/offres`) — liste triée par score, badges
+   colorés par niveau, marquage *prioritaire* / *sous le seuil*, recherche et
+   filtres décoratifs.
+3. **Détail offre** (`/p/[persona]/offres/[offerId]`) — score détaillé
+   (score ATS, chances d'entretien, piste A/B, notes) + bouton *Coacher*.
+4. **Coach** (`/p/[persona]/coach`) — **stub** : explique ce que fera le coach
+   live, CTA désactivé, aucun appel réel.
+5. **CV cible** (`/p/[persona]/cv`) — aperçu **statique** d'un CV d'exemple,
+   étiqueté « exemple », bouton de téléchargement décoratif.
 
-## Learn More
+## Personas (fictifs)
 
-To learn more about Next.js, take a look at the following resources:
+| Profil | Secteur | Séniorité | Offres | CV d'exemple |
+| --- | --- | --- | --- | --- |
+| Camille D. | Ressources humaines | Junior (~2 ans) | 5 | 1 page |
+| Sacha O. | Marketing digital | Confirmé (~6 ans) | 5 | 1 page |
+| Claude R. | Direction financière | Senior (12+ ans) | 5 | 2 pages |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+  page.tsx                       # Accueil + choix persona
+  p/[persona]/offres/            # Liste + détail des offres
+  p/[persona]/coach/             # Stub de coaching
+  p/[persona]/cv/                # Aperçu CV statique
+components/                      # Cartes, badges, header funnel, CV…
+data/
+  personas.json                  # Les 3 personas
+  offers/{rh,marketing,finance}.json
+  cv/{camille,sacha,claude}.json
+content/profil-*.md              # "Documents de vérité" par persona
+lib/                             # Types + accès aux données figées
+```
 
-## Deploy on Vercel
+## Thème
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+La couleur d'accent est une variable de thème (`--accent` dans
+`app/globals.css`), volontairement distincte du jaune de Welcome to the Jungle.
+La modifier met tout le funnel à jour.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Périmètre
+
+Voir [`RULES.md`](RULES.md). Cette démo est la **coquille** (interface + parcours
++ données figées). Le coaching live, le relais serverless détenant la clé API, le
+plafond de dépense et l'*email gating* sont **hors périmètre** ici.

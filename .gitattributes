@@ -1,0 +1,8 @@
+# Fins de ligne normalisées en LF (cf. brief : UTF-8 sans BOM, EOL = LF).
+* text=auto eol=lf
+
+# Binaires : pas de normalisation EOL.
+*.ico binary
+*.png binary
+*.jpg binary
+*.svg text eol=lf

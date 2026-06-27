@@ -1,0 +1,32 @@
+[
+  {
+    "id": "camille",
+    "name": "Camille D.",
+    "initials": "CD",
+    "sector": "Ressources humaines",
+    "seniority": "junior",
+    "seniorityLabel": "Junior · ~2 ans",
+    "title": "Chargé·e de recrutement",
+    "pitch": "Deux ans en recrutement, à l'aise sur le sourcing IT et l'expérience candidat. Cherche un poste où structurer un process de A à Z."
+  },
+  {
+    "id": "sacha",
+    "name": "Sacha O.",
+    "initials": "SO",
+    "sector": "Marketing digital",
+    "seniority": "middle",
+    "seniorityLabel": "Confirmé·e · ~6 ans",
+    "title": "Chef·fe de projet Growth / Acquisition",
+    "pitch": "Six ans en acquisition et growth, du paid au CRM. Pilote des budgets média et veut prendre la responsabilité d'un canal de bout en bout."
+  },
+  {
+    "id": "claude",
+    "name": "Claude R.",
+    "initials": "CR",
+    "sector": "Direction financière",
+    "seniority": "senior",
+    "seniorityLabel": "Senior · 12+ ans",
+    "title": "Directeur·rice administratif·ve et financier·ère (DAF)",
+    "pitch": "Plus de douze ans en finance d'entreprise, du contrôle de gestion à la direction financière. Vise un poste de DAF dans une ETI en croissance."
+  }
+]
