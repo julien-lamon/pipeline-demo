@@ -40,6 +40,17 @@ export function CoachLive({
     setError(null);
   }
 
+  // Re-verrouille côté client pour revoir l'étape de captation (utile en démo).
+  function resetAccess() {
+    try {
+      localStorage.removeItem("coach_gated");
+    } catch {}
+    setGated(false);
+    setAnalysis(null);
+    setCv(null);
+    setError(null);
+  }
+
   async function run(kind: "analyze" | "cv") {
     if (!offer) return;
     setLoading(kind);
@@ -106,24 +117,33 @@ export function CoachLive({
       {!gated ? (
         <EmailGate onUnlock={() => setGated(true)} />
       ) : (
-        <div className="flex flex-wrap gap-3">
+        <div className="space-y-2">
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => run("analyze")}
+              disabled={loading !== null}
+              className="rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {loading === "analyze"
+                ? "Analyse en cours…"
+                : "Analyser cette offre"}
+            </button>
+            <button
+              type="button"
+              onClick={() => run("cv")}
+              disabled={loading !== null}
+              className="rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {loading === "cv" ? "Génération en cours…" : "Générer le CV ciblé"}
+            </button>
+          </div>
           <button
             type="button"
-            onClick={() => run("analyze")}
-            disabled={loading !== null}
-            className="rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+            onClick={resetAccess}
+            className="text-xs text-ink-faint underline underline-offset-2 hover:text-muted"
           >
-            {loading === "analyze"
-              ? "Analyse en cours…"
-              : "Analyser cette offre"}
-          </button>
-          <button
-            type="button"
-            onClick={() => run("cv")}
-            disabled={loading !== null}
-            className="rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {loading === "cv" ? "Génération en cours…" : "Générer le CV ciblé"}
+            Accès débloqué. Réinitialiser pour revoir la captation d’email.
           </button>
         </div>
       )}
