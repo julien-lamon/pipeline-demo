@@ -1,0 +1,165 @@
+/* Charte CV corporate sobre (bleu pétrole / anthracite), volontairement
+   distincte du corail du site. Pensée A4, imprimable proprement (Ctrl+P). */
+
+.doc {
+  --cv-ink: #1c2733;
+  --cv-muted: #54616e;
+  --cv-accent: #1f4e6b;
+  --cv-rule: #c9d2da;
+
+  max-width: 820px;
+  margin: 0 auto;
+  background: #ffffff;
+  color: var(--cv-ink);
+  font-family:
+    -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  border: 1px solid var(--cv-rule);
+  border-radius: 6px;
+  padding: 28pt 30pt;
+  box-shadow: 0 1px 2px rgba(28, 39, 51, 0.06);
+}
+
+/* En-tête deux colonnes : photo d'identité + bloc texte */
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18pt;
+  align-items: center;
+  padding-bottom: 14pt;
+  border-bottom: 2px solid var(--cv-accent);
+}
+.photo {
+  width: 78px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--cv-rule);
+  /* Variante désaturée de l'avatar, pour le CV uniquement (pas de clash corail). */
+  filter: grayscale(1) contrast(1.02);
+}
+.name {
+  margin: 0;
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cv-ink);
+}
+.role {
+  margin: 2pt 0 0;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--cv-accent);
+}
+.contact {
+  margin: 6pt 0 0;
+  font-size: 9pt;
+  color: var(--cv-muted);
+}
+
+.section {
+  margin-top: 16pt;
+}
+.h2 {
+  margin: 0 0 7pt;
+  font-size: 9.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--cv-accent);
+  border-bottom: 1px solid var(--cv-rule);
+  padding-bottom: 3pt;
+}
+.summary,
+.langs {
+  margin: 0;
+  color: var(--cv-ink);
+}
+
+.xp {
+  margin-bottom: 10pt;
+}
+.xp:last-child {
+  margin-bottom: 0;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12pt;
+}
+.xpRole {
+  font-weight: 700;
+  color: var(--cv-ink);
+}
+.period {
+  flex-shrink: 0;
+  font-size: 9pt;
+  color: var(--cv-muted);
+  white-space: nowrap;
+}
+
+/* Puces custom : petit rond accent, pas de puce native */
+.bullets {
+  list-style: none;
+  margin: 4pt 0 0;
+  padding: 0;
+}
+.bullets li {
+  position: relative;
+  padding-left: 13pt;
+  margin-bottom: 2.5pt;
+}
+.bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4pt;
+  height: 4pt;
+  border-radius: 50%;
+  background: var(--cv-accent);
+}
+
+.eduRow {
+  margin-bottom: 3pt;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5pt 6pt;
+}
+.skill {
+  border: 1px solid var(--cv-rule);
+  border-radius: 3px;
+  padding: 2pt 6pt;
+  font-size: 9pt;
+  color: var(--cv-muted);
+  background: #fff;
+}
+
+/* Impression nette : pleine page, couleurs exactes, sans le chrome du site */
+@media print {
+  .doc {
+    max-width: none;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .doc,
+  .doc * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  :global(body) {
+    background: #fff;
+  }
+  :global(header),
+  :global(footer) {
+    display: none !important;
+  }
+}

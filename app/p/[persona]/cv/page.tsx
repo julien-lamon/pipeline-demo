@@ -35,13 +35,13 @@ export default async function CVPage({
         </div>
 
         <div className="mt-3 rounded-xl border border-dashed border-border bg-surface px-4 py-2 text-sm text-muted">
-          Référence non optimisée. Le coach en produit une version repriorisée
-          pour l’offre choisie : comparez l’accroche, l’ordre des compétences et
-          les expériences remontées.
+          CV brut, non optimisé pour une offre. Le coach en produit une version
+          ciblée pour l’offre choisie : comparez l’accroche, l’ordre des
+          compétences et les expériences remontées.
         </div>
 
         <div className="mt-5">
-          <CVPreview cv={cv} />
+          <CVPreview cv={cv} personaId={personaId} />
         </div>
       </main>
     </>

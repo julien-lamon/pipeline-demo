@@ -164,7 +164,7 @@ export function CoachLive({
       {cv && (
         <section>
           <h2 className="mb-3 text-lg font-bold tracking-tight">CV ciblé</h2>
-          <GeneratedCV cv={cv} />
+          <GeneratedCV cv={cv} personaId={personaId} />
         </section>
       )}
     </div>
