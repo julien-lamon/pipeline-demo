@@ -4,16 +4,26 @@
 
 import type { Offer } from "./types";
 
+// Ce que lit le coach : les métadonnées ET le CORPS D'ANNONCE complet. Le score
+// ATS (proximité) et atsMatch restent côté UI et ne sont PAS transmis au coach,
+// qui raisonne lui-même sur l'annonce + le document de vérité (axes séparés).
 function offerBlock(offer: Offer): string {
+  const d = offer.description;
   return [
     `Intitulé : ${offer.title}`,
     `Entreprise : ${offer.company}`,
     `Lieu : ${offer.location}`,
     `Contrat : ${offer.contract} · ${offer.remote}`,
     `Tags : ${offer.tags.join(", ")}`,
-    `Score veille interne : ${offer.score}/100 (ATS ${offer.scoreAts}/100), ` +
-      `chances ${offer.chancesEntretien}, piste ${offer.piste}`,
-    `Notes de la veille : ${offer.notes}`,
+    `Rémunération : ${d.salary}`,
+    "",
+    "Annonce :",
+    `Contexte : ${d.context}`,
+    `Missions : ${d.missions.join(" ; ")}`,
+    `Profil recherché : ${d.profile.join(" ; ")}`,
+    `Compétences et outils attendus : ${d.skills.join(", ")}`,
+    `Diplôme requis : ${d.diploma}`,
+    `Conditions : ${d.conditions}`,
   ].join("\n");
 }
 

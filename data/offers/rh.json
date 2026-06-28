@@ -3,75 +3,279 @@
     "id": "rh-1",
     "personaId": "camille",
     "title": "Chargé de recrutement IT",
-    "company": "Talinko",
-    "location": "Paris 9e",
+    "company": "Korrelis Tech",
+    "location": "Lyon",
     "contract": "CDI",
-    "remote": "Hybride",
-    "tags": ["RH", "Tech", "Sourcing"],
-    "score": 91,
-    "scoreAts": 89,
+    "remote": "Sur site",
+    "tags": ["Recrutement IT", "Sourcing", "ESN"],
+    "score": 88,
     "chancesEntretien": "Élevées",
     "piste": "A",
-    "notes": "Cœur de cible : recrutement tech avec sourcing, exactement le terrain des deux dernières années. Intitulé et stack de compétences alignés avec le profil, contexte hybride parisien adapté."
+    "atsMatch": {
+      "covered": [
+        "Sourcing LinkedIn Recruiter",
+        "Boolean search",
+        "Chasse directe",
+        "Recrutement tech (dev et data)",
+        "Entretien structuré",
+        "Gestion d'un vivier",
+        "ATS Lever"
+      ],
+      "missing": [
+        "Sourcing GitHub et Stack Overflow",
+        "Tests techniques sur CoderPad"
+      ]
+    },
+    "description": {
+      "context": "ESN lyonnaise de 250 personnes qui renforce son équipe de recrutement interne pour accélérer ses embauches tech. Poste autonome, du brief manager au closing.",
+      "missions": [
+        "Piloter le recrutement de profils tech (développeurs, data, DevOps) du brief manager au closing.",
+        "Sourcer les candidats via LinkedIn Recruiter, la recherche booléenne et la chasse directe.",
+        "Mener les entretiens structurés et coordonner les tests techniques avec les équipes.",
+        "Construire et animer un vivier de talents tech qualifiés.",
+        "Suivre les indicateurs de recrutement et reporter l'avancement aux managers."
+      ],
+      "profile": [
+        "2 ans minimum sur du recrutement tech en ESN ou en cabinet.",
+        "Maîtrise du sourcing booléen et de la chasse directe.",
+        "Aisance avec les stacks de développement et de data.",
+        "Présence sur site 5 jours sur 5 à Lyon exigée."
+      ],
+      "skills": [
+        "Sourcing LinkedIn Recruiter",
+        "Boolean search",
+        "Chasse directe",
+        "Recrutement tech (dev et data)",
+        "Entretien structuré",
+        "Gestion d'un vivier",
+        "ATS Lever",
+        "Sourcing GitHub et Stack Overflow",
+        "Tests techniques sur CoderPad"
+      ],
+      "diploma": "Bac+3 à Bac+5 en RH",
+      "salary": "42 k€ fixe + 6 k€ variable sur objectifs de recrutement",
+      "conditions": "CDI, Lyon, présentiel 5 jours sur 5."
+    }
   },
   {
     "id": "rh-2",
     "personaId": "camille",
     "title": "Talent Acquisition Specialist",
-    "company": "Nuage Software",
+    "company": "Velora",
     "location": "Paris 2e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["RH", "Tech", "Marque employeur"],
-    "score": 84,
-    "scoreAts": 82,
-    "chancesEntretien": "Moyennes",
+    "tags": ["Talent Acquisition", "Marque employeur", "Scale-up"],
+    "score": 95,
+    "chancesEntretien": "Élevées",
     "piste": "B",
-    "notes": "Bon recouvrement sur le recrutement et l'expérience candidat. Attendu plus de séniorité sur la marque employeur ; positionnable en piste B comme prise de responsabilité."
+    "atsMatch": {
+      "covered": [
+        "Sourcing LinkedIn Recruiter",
+        "Chasse directe",
+        "Recrutement tech (dev et data)",
+        "Entretien structuré",
+        "Marque employeur",
+        "Expérience candidat",
+        "Indicateurs de recrutement (time-to-hire)",
+        "ATS Teamtailor"
+      ],
+      "missing": [
+        "Pilotage d'un programme d'ambassadeurs (employee advocacy)"
+      ]
+    },
+    "description": {
+      "context": "Scale-up SaaS en forte croissance qui structure sa fonction Talent Acquisition. Poste à responsabilité sur le recrutement tech et la marque employeur, sans management d'équipe.",
+      "missions": [
+        "Gérer le recrutement tech et produit de bout en bout sur un fort volume de postes.",
+        "Déployer la stratégie de marque employeur et améliorer l'expérience candidat.",
+        "Animer le sourcing LinkedIn Recruiter et la chasse directe.",
+        "Suivre les indicateurs (time-to-hire, taux de transformation) et les restituer au CODIR.",
+        "Piloter un programme d'ambassadeurs internes pour développer la cooptation."
+      ],
+      "profile": [
+        "3 ans d'expérience en recrutement tech, idéalement en scale-up.",
+        "Sensibilité forte à la marque employeur et à l'expérience candidat.",
+        "Capacité à structurer des process et à piloter par les indicateurs."
+      ],
+      "skills": [
+        "Sourcing LinkedIn Recruiter",
+        "Chasse directe",
+        "Recrutement tech (dev et data)",
+        "Entretien structuré",
+        "Marque employeur",
+        "Expérience candidat",
+        "Indicateurs de recrutement (time-to-hire)",
+        "ATS Teamtailor",
+        "Pilotage d'un programme d'ambassadeurs (employee advocacy)"
+      ],
+      "diploma": "Bac+5 RH ou école de commerce",
+      "salary": "45 k€ à 50 k€ selon profil",
+      "conditions": "CDI, Paris 2e, hybride (3 jours sur site)."
+    }
   },
   {
     "id": "rh-3",
     "personaId": "camille",
     "title": "Chargé de recrutement",
-    "company": "Orsay Conseil",
+    "company": "Cabinet Donadieu",
     "location": "Boulogne-Billancourt",
     "contract": "CDD",
     "remote": "Sur site",
-    "tags": ["RH", "Conseil", "Volume"],
-    "score": 77,
-    "scoreAts": 75,
+    "tags": ["Recrutement", "Volume", "Cabinet"],
+    "score": 76,
     "chancesEntretien": "Moyennes",
     "piste": "A",
-    "notes": "Recrutement volume en cabinet, compétences transférables. CDD et présentiel intégral plafonnent l'intérêt, mais piste A crédible pour entretenir l'activité."
+    "atsMatch": {
+      "covered": [
+        "Préqualification téléphonique",
+        "Multidiffusion d'annonces",
+        "Grilles d'évaluation",
+        "ATS Welcome Kit",
+        "Reporting et indicateurs de recrutement"
+      ],
+      "missing": [
+        "Sourcing CVthèque (Indeed, HelloWork)",
+        "Recrutement à volume en intérim",
+        "Relation client commerciale"
+      ]
+    },
+    "description": {
+      "context": "Cabinet de recrutement généraliste qui cherche un renfort en CDD pour absorber un pic d'activité sur des postes support et tertiaires.",
+      "missions": [
+        "Traiter un fort volume de candidatures sur des postes support et tertiaires.",
+        "Réaliser les préqualifications téléphoniques et les entretiens de présélection.",
+        "Diffuser les annonces en multidiffusion et exploiter les CVthèques.",
+        "Assurer le reporting d'activité auprès des consultants et des clients."
+      ],
+      "profile": [
+        "Première expérience en cabinet ou en agence d'intérim appréciée.",
+        "Goût du volume et de la cadence.",
+        "Aisance relationnelle avec les clients."
+      ],
+      "skills": [
+        "Préqualification téléphonique",
+        "Multidiffusion d'annonces",
+        "Grilles d'évaluation",
+        "ATS Welcome Kit",
+        "Reporting et indicateurs de recrutement",
+        "Sourcing CVthèque (Indeed, HelloWork)",
+        "Recrutement à volume en intérim",
+        "Relation client commerciale"
+      ],
+      "diploma": "Bac+2 à Bac+5 RH",
+      "salary": "32 k€ fixe + primes sur placements (jusqu'à 8 k€)",
+      "conditions": "CDD de 9 mois, Boulogne-Billancourt, sur site."
+    }
   },
   {
     "id": "rh-4",
     "personaId": "camille",
-    "title": "Gestionnaire RH & Paie",
-    "company": "Bélure Distribution",
+    "title": "Gestionnaire RH et Paie",
+    "company": "Méningaud Distribution",
     "location": "Gennevilliers",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["RH", "Paie", "ADP"],
-    "score": 66,
-    "scoreAts": 64,
+    "tags": ["Paie", "ADP", "SIRH"],
+    "score": 44,
     "chancesEntretien": "Faibles",
     "piste": "A",
-    "notes": "Sous le seuil : la paie et l'administration du personnel ne sont pas le cœur de l'expérience recrutement. Compétences partielles, risque de filtre ATS sur les logiciels de paie."
+    "atsMatch": {
+      "covered": [
+        "Préqualification téléphonique",
+        "Gestion administrative des contrats",
+        "Reporting RH"
+      ],
+      "missing": [
+        "Gestion de la paie (Silae)",
+        "Déclaration sociale nominative (DSN)",
+        "Administration du personnel",
+        "Gestion des absences et congés",
+        "SIRH paie"
+      ]
+    },
+    "description": {
+      "context": "Entreprise de distribution qui recherche un gestionnaire à dominante paie et administration du personnel pour un périmètre d'environ 200 salariés.",
+      "missions": [
+        "Gérer la paie d'environ 200 salariés sur Silae, de la collecte des variables au bulletin.",
+        "Établir les déclarations sociales nominatives (DSN) et suivre les charges.",
+        "Administrer le personnel : contrats, avenants, absences et congés.",
+        "Appuyer ponctuellement le recrutement des profils support.",
+        "Produire le reporting RH mensuel."
+      ],
+      "profile": [
+        "Expérience confirmée en gestion de la paie et administration du personnel.",
+        "Maîtrise d'un logiciel de paie (Silae apprécié).",
+        "Rigueur et respect strict des échéances sociales."
+      ],
+      "skills": [
+        "Préqualification téléphonique",
+        "Gestion administrative des contrats",
+        "Reporting RH",
+        "Gestion de la paie (Silae)",
+        "Déclaration sociale nominative (DSN)",
+        "Administration du personnel",
+        "Gestion des absences et congés",
+        "SIRH paie"
+      ],
+      "diploma": "Bac+2 à Bac+3 en gestion de la paie ou RH",
+      "salary": "34 k€ à 38 k€",
+      "conditions": "CDI, Gennevilliers, sur site."
+    }
   },
   {
     "id": "rh-5",
     "personaId": "camille",
-    "title": "Responsable RH",
-    "company": "Hôtels Maraval",
+    "title": "Responsable RH généraliste",
+    "company": "Groupe Salvène",
     "location": "Paris 8e",
     "contract": "CDI",
-    "remote": "Sur site",
-    "tags": ["RH", "Management", "Généraliste"],
-    "score": 58,
-    "scoreAts": 55,
+    "remote": "Hybride",
+    "tags": ["RH généraliste", "Management", "Relations sociales"],
+    "score": 55,
     "chancesEntretien": "Faibles",
     "piste": "B",
-    "notes": "Sous le seuil : poste généraliste avec management d'équipe attendu, en avance d'un cran sur deux ans d'expérience. À garder en veille pour plus tard."
+    "atsMatch": {
+      "covered": [
+        "Sourcing et recrutement",
+        "Entretien structuré",
+        "Reporting RH"
+      ],
+      "missing": [
+        "Droit social",
+        "Relations sociales (CSE)",
+        "Gestion de la paie",
+        "Plan de formation",
+        "SIRH"
+      ]
+    },
+    "description": {
+      "context": "Groupe de services qui recrute un responsable RH généraliste pour piloter sa fonction RH et encadrer une petite équipe.",
+      "missions": [
+        "Piloter la fonction RH d'un périmètre de 300 collaborateurs.",
+        "Encadrer et faire monter en compétences une équipe de 3 gestionnaires RH.",
+        "Superviser le recrutement, la formation et le développement des talents.",
+        "Gérer les relations sociales et le dialogue avec le CSE.",
+        "Superviser la paie et l'administration du personnel."
+      ],
+      "profile": [
+        "5 ans d'expérience RH dont une première expérience d'encadrement d'équipe.",
+        "Solides bases en droit social et en relations sociales.",
+        "Posture de manager et de partenaire des opérationnels."
+      ],
+      "skills": [
+        "Sourcing et recrutement",
+        "Entretien structuré",
+        "Reporting RH",
+        "Droit social",
+        "Relations sociales (CSE)",
+        "Gestion de la paie",
+        "Plan de formation",
+        "SIRH"
+      ],
+      "diploma": "Bac+5 RH, droit social ou équivalent",
+      "salary": "48 k€ à 52 k€",
+      "conditions": "CDI, Paris 8e, hybride (2 jours de télétravail)."
+    }
   }
 ]

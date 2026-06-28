@@ -9,7 +9,30 @@ export type Chances = "Faibles" | "Moyennes" | "Élevées";
 /** Niveau de score, dérivé du score global (voir lib/data.ts). */
 export type ScoreLevel = "high" | "mid" | "low";
 
-/** Une offre d'emploi fictive, déjà scorée par la "veille figée". */
+/** Corps d'annonce complet d'une offre. C'est ce que lit le coach (offerBlock). */
+export interface OfferDescription {
+  context: string;
+  /** Missions du poste. */
+  missions: string[];
+  /** Profil recherché (attendus côté candidat). */
+  profile: string[];
+  /** Compétences et outils exigés (la matière du score ATS). */
+  skills: string[];
+  /** Diplôme requis (ou "Non précisé"). */
+  diploma: string;
+  /** Rémunération : fixe, et part variable explicite sur 1 à 2 offres. */
+  salary: string;
+  /** Conditions récapitulées : contrat, lieu, télétravail. */
+  conditions: string;
+}
+
+/** Justification factuelle du score ATS (mots-clés). Affichée dans l'UI, jamais transmise au coach. */
+export interface OfferAtsMatch {
+  covered: string[];
+  missing: string[];
+}
+
+/** Une offre d'emploi fictive et figée (corps d'annonce complet + score ATS figé). */
 export interface Offer {
   id: string;
   personaId: string;
@@ -22,14 +45,12 @@ export interface Offer {
   remote: string;
   /** Tags décoratifs affichés sur la carte. */
   tags: string[];
-  /** Score global 0–100 (tri et badge). */
+  /** Score ATS = proximité sémantique offre/profil (cf. docs/scoring-ats.md). Figé, 0-100. */
   score: number;
-  /** Sous-score de compatibilité ATS 0–100. */
-  scoreAts: number;
   chancesEntretien: Chances;
   piste: Piste;
-  /** Justification courte du score (1–2 phrases). */
-  notes: string;
+  atsMatch: OfferAtsMatch;
+  description: OfferDescription;
 }
 
 export interface CVExperience {

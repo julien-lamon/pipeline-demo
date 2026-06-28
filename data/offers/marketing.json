@@ -3,75 +3,278 @@
     "id": "mk-1",
     "personaId": "sacha",
     "title": "Growth Manager",
-    "company": "Pelio",
-    "location": "Paris 11e",
+    "company": "Velora",
+    "location": "Paris 2e",
     "contract": "CDI",
-    "remote": "Hybride",
-    "tags": ["Growth", "Acquisition", "Data"],
-    "score": 93,
-    "scoreAts": 90,
+    "remote": "Sur site",
+    "tags": ["Growth", "Acquisition", "Scale-up"],
+    "score": 95,
     "chancesEntretien": "Élevées",
     "piste": "B",
-    "notes": "Cœur de cible : responsabilité d'un canal de bout en bout, du paid au CRM, avec pilotage data. Séniorité et scope alignés avec l'objectif de positionnement."
+    "atsMatch": {
+      "covered": [
+        "Google Ads",
+        "Meta Ads",
+        "GA4",
+        "Looker Studio",
+        "A/B testing",
+        "CRO",
+        "CRM HubSpot",
+        "Pilotage CAC/ROAS"
+      ],
+      "missing": ["SQL avancé"]
+    },
+    "description": {
+      "context": "Velora est une fintech B2C en série B qui structure sa cellule growth pour passer le cap des 100 000 clients. Le poste prend la responsabilité complète des canaux d'acquisition payants.",
+      "missions": [
+        "Piloter de bout en bout les budgets paid (Google, Meta) sur un périmètre à six chiffres",
+        "Construire et industrialiser un programme d'A/B testing sur landing pages et tunnels",
+        "Optimiser le taux de conversion (CRO) du funnel d'inscription jusqu'à l'activation",
+        "Suivre et défendre le CAC et le ROAS par canal dans des dashboards Looker Studio",
+        "Faire évoluer le scoring et les workflows d'acquisition dans le CRM HubSpot",
+        "Recommander de nouveaux canaux d'acquisition à tester chaque trimestre"
+      ],
+      "profile": [
+        "5 ans et plus en growth ou acquisition digitale, idéalement en SaaS ou fintech",
+        "Forte culture data et test-and-learn, à l'aise avec le pilotage de budgets média conséquents",
+        "Capacité à porter un canal de bout en bout sans supervision rapprochée",
+        "Maîtrise de l'analyse de performance et de l'attribution"
+      ],
+      "skills": [
+        "Google Ads",
+        "Meta Ads",
+        "GA4",
+        "Looker Studio",
+        "A/B testing",
+        "CRO",
+        "CRM HubSpot",
+        "Pilotage CAC/ROAS",
+        "SQL avancé"
+      ],
+      "diploma": "Bac+5 en marketing digital ou école de commerce",
+      "salary": "58 k€ fixe + 12 k€ variable",
+      "conditions": "CDI, Paris 2e, présence sur site 5 jours sur 5 exigée (pas de télétravail)."
+    }
   },
   {
     "id": "mk-2",
     "personaId": "sacha",
-    "title": "Chef de projet Marketing Digital",
-    "company": "Aurea Studio",
-    "location": "Lyon",
+    "title": "Responsable acquisition digitale",
+    "company": "Brindo",
+    "location": "Paris 9e",
     "contract": "CDI",
-    "remote": "Télétravail",
-    "tags": ["Marketing", "Projet", "SEO/SEA"],
-    "score": 82,
-    "scoreAts": 80,
-    "chancesEntretien": "Moyennes",
+    "remote": "Hybride",
+    "tags": ["Acquisition", "Paid", "E-commerce"],
+    "score": 88,
+    "chancesEntretien": "Élevées",
     "piste": "A",
-    "notes": "Fort recouvrement sur la gestion de projet et l'acquisition SEO/SEA. Full remote depuis Lyon compatible ; un cran sous le scope growth visé, mais piste A solide."
+    "atsMatch": {
+      "covered": [
+        "Google Ads",
+        "Meta Ads",
+        "SEA",
+        "GA4",
+        "Attribution et tracking",
+        "Acquisition multicanale",
+        "Gestion budgétaire média"
+      ],
+      "missing": ["Amazon Ads", "ASO mobile"]
+    },
+    "description": {
+      "context": "Brindo est une scale-up e-commerce qui accélère son acquisition payante sur plusieurs marchés européens. Le poste pilote la croissance des canaux paid et l'efficacité média.",
+      "missions": [
+        "Gérer les campagnes SEA et social ads sur un budget annuel à six chiffres",
+        "Optimiser l'allocation budgétaire média entre canaux selon le ROAS",
+        "Fiabiliser l'attribution et le tracking de bout en bout des conversions",
+        "Étendre l'acquisition multicanale sans dégrader le CAC global",
+        "Produire un reporting de performance hebdomadaire pour la direction"
+      ],
+      "profile": [
+        "5 ans et plus en acquisition digitale payante, en agence ou chez l'annonceur",
+        "Solide maîtrise du SEA et des plateformes social ads",
+        "Rigueur sur le suivi des indicateurs CAC et ROAS",
+        "Esprit analytique et orientation résultat"
+      ],
+      "skills": [
+        "Google Ads",
+        "Meta Ads",
+        "SEA",
+        "GA4",
+        "Attribution et tracking",
+        "Acquisition multicanale",
+        "Gestion budgétaire média",
+        "Amazon Ads",
+        "ASO mobile"
+      ],
+      "diploma": "Bac+5 marketing ou équivalent",
+      "salary": "50 k€ fixe + 8 k€ variable",
+      "conditions": "CDI, Paris 9e, hybride 3 jours sur site et 2 jours en télétravail."
+    }
   },
   {
     "id": "mk-3",
     "personaId": "sacha",
-    "title": "Traffic Manager / Acquisition",
-    "company": "Klimt Media",
-    "location": "Paris 17e",
-    "contract": "CDI",
-    "remote": "Hybride",
-    "tags": ["Paid", "Acquisition", "Ads"],
-    "score": 76,
-    "scoreAts": 74,
+    "title": "Chef de projet marketing digital",
+    "company": "Nuvio",
+    "location": "Nantes",
+    "contract": "Freelance",
+    "remote": "Télétravail",
+    "tags": ["Marketing digital", "CRM", "Automation"],
+    "score": 75,
     "chancesEntretien": "Moyennes",
     "piste": "A",
-    "notes": "Spécialisation paid bien maîtrisée, mais périmètre plus étroit que le profil growth complet. Bon pour rentrer du résultat rapidement sans élargir le récit."
+    "atsMatch": {
+      "covered": [
+        "Google Ads",
+        "Meta Ads",
+        "GA4",
+        "A/B testing",
+        "Marketing automation",
+        "CRM HubSpot"
+      ],
+      "missing": [
+        "Salesforce Marketing Cloud",
+        "Marketo",
+        "ABM (Account-Based Marketing)",
+        "Brand content"
+      ]
+    },
+    "description": {
+      "context": "Nuvio est une scale-up SaaS B2B qui externalise le pilotage de ses campagnes marketing digitales en mission longue. Le poste couvre l'acquisition et le nurturing.",
+      "missions": [
+        "Piloter les campagnes paid et les séquences d'automation de bout en bout",
+        "Mettre en place des A/B tests sur les emails et les pages de conversion",
+        "Animer le CRM et les scénarios de nurturing des leads",
+        "Suivre la performance des campagnes dans GA4",
+        "Coordonner les actions ABM avec l'équipe commerciale"
+      ],
+      "profile": [
+        "Expérience confirmée en marketing digital B2B",
+        "Autonomie totale en mode freelance",
+        "Aisance avec les outils d'automation et de CRM",
+        "Connaissance des approches ABM appréciée"
+      ],
+      "skills": [
+        "Google Ads",
+        "Meta Ads",
+        "GA4",
+        "A/B testing",
+        "Marketing automation",
+        "CRM HubSpot",
+        "Salesforce Marketing Cloud",
+        "Marketo",
+        "ABM (Account-Based Marketing)",
+        "Brand content"
+      ],
+      "diploma": "Bac+5 marketing ou expérience équivalente",
+      "salary": "TJM 450 à 520 €",
+      "conditions": "Freelance, mission longue en télétravail complet, rattachement Nantes."
+    }
   },
   {
     "id": "mk-4",
     "personaId": "sacha",
-    "title": "Social Media Manager",
-    "company": "Bloomé",
-    "location": "Paris 3e",
+    "title": "Social Media & Content Manager",
+    "company": "Glowby",
+    "location": "Paris 11e",
     "contract": "CDD",
-    "remote": "Sur site",
-    "tags": ["Social", "Contenu", "Community"],
-    "score": 64,
-    "scoreAts": 61,
+    "remote": "Hybride",
+    "tags": ["Social media", "Contenu", "Community"],
+    "score": 45,
     "chancesEntretien": "Faibles",
     "piste": "A",
-    "notes": "Sous le seuil : dominante contenu et community management, plus junior et décalée de l'acquisition. CDD présentiel ; faible levier sur les objectifs growth."
+    "atsMatch": {
+      "covered": ["Meta Ads", "Copywriting d'annonces", "GA4", "A/B testing"],
+      "missing": [
+        "Community management",
+        "Production de contenu vidéo",
+        "Gestion d'influenceurs",
+        "Montage (Canva/CapCut)",
+        "Calendrier éditorial"
+      ]
+    },
+    "description": {
+      "context": "Glowby est une marque DTC de cosmétique qui renforce sa présence sociale. Le poste est centré sur la création de contenu et l'animation des communautés.",
+      "missions": [
+        "Animer au quotidien les comptes sociaux et la communauté de la marque",
+        "Produire et monter des contenus courts (vidéo, visuels)",
+        "Tenir le calendrier éditorial et publier sur l'ensemble des réseaux",
+        "Coordonner les partenariats avec des créateurs et influenceurs",
+        "Appuyer les boosts payants sur Meta Ads"
+      ],
+      "profile": [
+        "Expérience en community management et création de contenu",
+        "Sens éditorial et maîtrise des codes des réseaux sociaux",
+        "À l'aise avec les outils de montage et de design simples",
+        "Créativité et réactivité"
+      ],
+      "skills": [
+        "Community management",
+        "Production de contenu vidéo",
+        "Gestion d'influenceurs",
+        "Montage (Canva/CapCut)",
+        "Calendrier éditorial",
+        "Meta Ads",
+        "Copywriting d'annonces",
+        "GA4",
+        "A/B testing"
+      ],
+      "diploma": "Bac+3 communication ou marketing",
+      "salary": "40 k€ fixe",
+      "conditions": "CDD 12 mois, Paris 11e, hybride 2 jours en télétravail."
+    }
   },
   {
     "id": "mk-5",
     "personaId": "sacha",
-    "title": "Responsable Marketing",
-    "company": "Voltaa Énergie",
-    "location": "Nanterre",
+    "title": "Chef de projet marketing digital",
+    "company": "Maison Tarbé",
+    "location": "Lille",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Marketing", "Management", "B2B"],
-    "score": 56,
-    "scoreAts": 53,
+    "tags": ["Marketing digital", "Presse", "SEO"],
+    "score": 67,
     "chancesEntretien": "Faibles",
     "piste": "B",
-    "notes": "Sous le seuil : poste très généraliste avec management et budget large, en avance sur le parcours acquisition. Secteur B2B énergie éloigné de l'expérience produit."
+    "atsMatch": {
+      "covered": ["SEO technique", "GA4", "Google Ads", "Looker Studio"],
+      "missing": [
+        "SEO local (Google Business Profile)",
+        "Adobe InDesign",
+        "Régie publicitaire presse",
+        "CRM Salesforce",
+        "Gestion d'abonnements"
+      ]
+    },
+    "description": {
+      "context": "Maison Tarbé est un groupe historique de presse imprimée et d'annuaires régionaux dont les budgets marketing se réduisent d'année en année. Le poste accompagne une transition numérique tardive.",
+      "missions": [
+        "Piloter les campagnes Google Ads et le référencement des sites du groupe",
+        "Améliorer le SEO technique et le SEO local des titres régionaux",
+        "Suivre l'audience dans GA4 et construire des reportings Looker Studio",
+        "Coordonner les supports print et digital avec la régie publicitaire",
+        "Gérer la base d'abonnés et les campagnes de fidélisation"
+      ],
+      "profile": [
+        "Expérience en marketing digital et en référencement",
+        "Polyvalence print et digital",
+        "Connaissance d'un CRM de gestion d'abonnements appréciée",
+        "Capacité à travailler avec des moyens contraints"
+      ],
+      "skills": [
+        "SEO technique",
+        "GA4",
+        "Google Ads",
+        "Looker Studio",
+        "SEO local (Google Business Profile)",
+        "Adobe InDesign",
+        "Régie publicitaire presse",
+        "CRM Salesforce",
+        "Gestion d'abonnements"
+      ],
+      "diploma": "Bac+5 marketing ou communication",
+      "salary": "45 k€ fixe",
+      "conditions": "CDI, Lille, hybride 1 jour en télétravail, secteur presse en repli."
+    }
   }
 ]

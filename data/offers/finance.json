@@ -3,75 +3,279 @@
     "id": "fi-1",
     "personaId": "claude",
     "title": "Directeur Administratif et Financier",
-    "company": "Groupe Vendôme",
-    "location": "Paris 8e",
+    "company": "Helvetia Croissance",
+    "location": "Paris 9e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["DAF", "Pilotage", "ETI"],
-    "score": 90,
-    "scoreAts": 88,
+    "tags": ["DAF", "ETI", "Direction financière"],
+    "score": 92,
     "chancesEntretien": "Élevées",
     "piste": "B",
-    "notes": "Cœur de cible : poste de DAF en ETI en croissance, scope direction financière complète. Séniorité, périmètre et secteur alignés avec l'objectif de positionnement."
+    "atsMatch": {
+      "covered": [
+        "Direction financière",
+        "Consolidation IFRS",
+        "Clôture mensuelle et annuelle",
+        "Trésorerie et BFR",
+        "Financement et dette bancaire",
+        "Reporting groupe",
+        "SAP FI/CO",
+        "Management d'équipe finance"
+      ],
+      "missing": ["Consolidation sous Tagetik"]
+    },
+    "description": {
+      "context": "Helvetia Croissance, ETI agroalimentaire (290 M€ de CA, 5 filiales) en forte croissance externe, crée un poste de DAF rattaché directement au directeur général pour structurer la direction financière et accompagner deux acquisitions prévues sur 18 mois.",
+      "missions": [
+        "Piloter l'ensemble de la fonction finance : comptabilité, contrôle de gestion, trésorerie et consolidation.",
+        "Garantir les clôtures mensuelles et annuelles et la consolidation IFRS du groupe.",
+        "Optimiser le BFR et sécuriser le financement de la croissance avec le pool bancaire.",
+        "Construire le budget, les forecasts et le reporting destinés au directeur général et aux actionnaires.",
+        "Encadrer et faire monter en compétence une équipe finance de 9 personnes.",
+        "Co-piloter les opérations de croissance externe, de la due diligence à l'intégration."
+      ],
+      "profile": [
+        "Expérience confirmée de direction financière en ETI multi-filiales.",
+        "Maîtrise de la consolidation IFRS et des cycles de clôture rapides.",
+        "Aisance avec les opérations de financement et la relation bancaire.",
+        "Posture de business partner auprès de la direction générale."
+      ],
+      "skills": [
+        "Direction financière",
+        "Consolidation IFRS",
+        "Clôture mensuelle et annuelle",
+        "Trésorerie et BFR",
+        "Financement et dette bancaire",
+        "Reporting groupe",
+        "SAP FI/CO",
+        "Management d'équipe finance",
+        "Consolidation sous Tagetik"
+      ],
+      "diploma": "Bac+5 finance / DSCG ou équivalent, expérience confirmée en direction financière d'ETI.",
+      "salary": "95 k€ fixe + 20 k€ variable",
+      "conditions": "CDI, statut cadre dirigeant, hybride 3 jours sur site, accès direct au comité de direction."
+    }
   },
   {
     "id": "fi-2",
     "personaId": "claude",
     "title": "Responsable du contrôle de gestion",
-    "company": "Sartène Industries",
+    "company": "Lumira Distribution",
     "location": "Lyon",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Contrôle de gestion", "Industrie", "Reporting"],
+    "tags": ["Contrôle de gestion", "Reporting", "Distribution"],
     "score": 83,
-    "scoreAts": 81,
     "chancesEntretien": "Moyennes",
     "piste": "B",
-    "notes": "Très bon recouvrement sur le contrôle de gestion et le reporting industriel. Un échelon sous le poste de DAF visé, mais marche d'accès crédible en piste B."
+    "atsMatch": {
+      "covered": [
+        "Contrôle de gestion",
+        "Budget et forecast",
+        "Reporting groupe",
+        "Analyse de profitabilité",
+        "Business partnering",
+        "Power BI",
+        "Excel avancé",
+        "SAP CO"
+      ],
+      "missing": []
+    },
+    "description": {
+      "context": "Lumira Distribution, réseau de distribution spécialisée (150 M€ de CA, 8 business units), renforce son pilotage de la performance et recherche un responsable du contrôle de gestion pour animer le reporting groupe et les processus budgétaires.",
+      "missions": [
+        "Animer le cycle budgétaire et les forecasts trimestriels sur 8 business units.",
+        "Produire et fiabiliser le reporting groupe mensuel à destination de la direction.",
+        "Conduire les analyses de profitabilité par activité et par canal.",
+        "Accompagner les opérationnels en business partner sur leurs plans d'action.",
+        "Faire évoluer les tableaux de bord sous Power BI et les outils de pilotage."
+      ],
+      "profile": [
+        "Solide expérience en contrôle de gestion en environnement multi-sites.",
+        "Maîtrise du reporting groupe et de la construction budgétaire.",
+        "Capacité à dialoguer avec les opérationnels et à vulgariser les chiffres.",
+        "Aisance avec Power BI et les ERP de gestion."
+      ],
+      "skills": [
+        "Contrôle de gestion",
+        "Budget et forecast",
+        "Reporting groupe",
+        "Analyse de profitabilité",
+        "Business partnering",
+        "Power BI",
+        "Excel avancé",
+        "SAP CO"
+      ],
+      "diploma": "Bac+5 finance / contrôle de gestion (type DSCG, master CCA ou école de commerce).",
+      "salary": "68 k€ fixe",
+      "conditions": "CDI, statut cadre, hybride 2 jours de télétravail, rattachement au directeur financier."
+    }
   },
   {
     "id": "fi-3",
     "personaId": "claude",
-    "title": "Chef comptable",
-    "company": "Helia Santé",
-    "location": "Montrouge",
+    "title": "Directeur financier de division",
+    "company": "Norvexa Group",
+    "location": "Paris La Défense",
     "contract": "CDI",
-    "remote": "Sur site",
-    "tags": ["Comptabilité", "Clôture", "Santé"],
-    "score": 72,
-    "scoreAts": 70,
+    "remote": "Hybride",
+    "tags": ["Direction financière", "Grand groupe", "Reporting"],
+    "score": 80,
     "chancesEntretien": "Moyennes",
-    "piste": "A",
-    "notes": "Compétences comptables et clôture maîtrisées, mais poste centré production sans dimension pilotage. Juste au-dessus du seuil ; piste A pour sécuriser un revenu."
+    "piste": "B",
+    "atsMatch": {
+      "covered": [
+        "Direction financière",
+        "Consolidation IFRS",
+        "Reporting groupe",
+        "Budget et forecast",
+        "Business partnering",
+        "SAP FI/CO",
+        "Relation banques et commissaires aux comptes",
+        "Analyse de profitabilité"
+      ],
+      "missing": [
+        "Oracle Hyperion (HFM)",
+        "Consolidation US GAAP",
+        "Fiscalité internationale groupe"
+      ]
+    },
+    "description": {
+      "context": "Norvexa Group, groupe industriel coté (2,4 Md€ de CA, présent dans 15 pays), recherche un directeur financier pour l'une de ses divisions, au sein d'une organisation matricielle structurée en plusieurs niveaux de reporting corporate.",
+      "missions": [
+        "Piloter la performance financière de la division et son reporting vers le corporate.",
+        "Garantir la consolidation IFRS et la cohérence des clôtures avec les normes groupe.",
+        "Construire le budget de la division et défendre les forecasts en revue corporate.",
+        "Accompagner les directeurs opérationnels en business partner financier.",
+        "Assurer la relation avec les commissaires aux comptes et les directions centrales."
+      ],
+      "profile": [
+        "Expérience de direction financière en grand groupe international.",
+        "Maîtrise de la consolidation IFRS et des environnements matriciels.",
+        "Aisance dans les organisations à plusieurs niveaux hiérarchiques.",
+        "Anglais courant indispensable."
+      ],
+      "skills": [
+        "Direction financière",
+        "Consolidation IFRS",
+        "Reporting groupe",
+        "Budget et forecast",
+        "Business partnering",
+        "SAP FI/CO",
+        "Relation banques et commissaires aux comptes",
+        "Analyse de profitabilité",
+        "Oracle Hyperion (HFM)",
+        "Consolidation US GAAP",
+        "Fiscalité internationale groupe"
+      ],
+      "diploma": "Bac+5 finance / DSCG ou équivalent, expérience en groupe international coté.",
+      "salary": "110 k€ fixe + 25 k€ variable",
+      "conditions": "CDI, statut cadre, hybride 2 jours, reporting au DAF de zone puis au DAF groupe (organisation matricielle à 4 niveaux)."
+    }
   },
   {
     "id": "fi-4",
     "personaId": "claude",
     "title": "Contrôleur de gestion senior",
-    "company": "Maïa Retail",
-    "location": "Paris 12e",
+    "company": "Brassac Energie",
+    "location": "Nantes",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Contrôle de gestion", "Retail", "Budget"],
-    "score": 67,
-    "scoreAts": 65,
-    "chancesEntretien": "Faibles",
+    "tags": ["Contrôle de gestion", "Énergie", "Pilotage"],
+    "score": 72,
+    "chancesEntretien": "Moyennes",
     "piste": "A",
-    "notes": "Sous le seuil : poste de contributeur individuel, en deçà du niveau direction visé. Risque de surqualification perçue, faible progression de récit."
+    "atsMatch": {
+      "covered": [
+        "Contrôle de gestion",
+        "Budget et forecast",
+        "Reporting opérationnel",
+        "Analyse de profitabilité",
+        "Power BI",
+        "SAP CO"
+      ],
+      "missing": ["Anaplan", "Modélisation VBA"]
+    },
+    "description": {
+      "context": "Brassac Energie, acteur des énergies renouvelables (110 M€ de CA), renforce son équipe de contrôle de gestion et recherche un contrôleur de gestion senior, poste de contributeur individuel rattaché au responsable du contrôle de gestion.",
+      "missions": [
+        "Produire le reporting opérationnel mensuel par centre de profit.",
+        "Participer à la construction budgétaire et aux forecasts.",
+        "Réaliser les analyses de profitabilité des projets et des actifs.",
+        "Maintenir et fiabiliser les tableaux de bord sous Power BI.",
+        "Apporter un appui chiffré aux équipes opérationnelles."
+      ],
+      "profile": [
+        "Expérience confirmée en contrôle de gestion opérationnel.",
+        "Rigueur analytique et goût du chiffre.",
+        "Maîtrise d'Excel avancé et des outils de dataviz."
+      ],
+      "skills": [
+        "Contrôle de gestion",
+        "Budget et forecast",
+        "Reporting opérationnel",
+        "Analyse de profitabilité",
+        "Power BI",
+        "SAP CO",
+        "Anaplan",
+        "Modélisation VBA"
+      ],
+      "diploma": "Bac+5 finance / contrôle de gestion (master CCA, école de commerce ou DSCG).",
+      "salary": "82 k€ fixe",
+      "conditions": "CDI, statut cadre, hybride 2 jours, poste de contributeur individuel sans encadrement, rattaché au responsable du contrôle de gestion."
+    }
   },
   {
     "id": "fi-5",
     "personaId": "claude",
     "title": "Credit Manager",
-    "company": "Norelis",
-    "location": "Roissy-en-France",
+    "company": "Delorme Negoce",
+    "location": "Roissy",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["Crédit", "Recouvrement", "BFR"],
-    "score": 59,
-    "scoreAts": 56,
+    "tags": ["Crédit", "Recouvrement", "Négoce"],
+    "score": 52,
     "chancesEntretien": "Faibles",
-    "piste": "B",
-    "notes": "Sous le seuil : spécialité crédit et recouvrement hors du cœur direction financière. Périmètre étroit, présentiel excentré, faible apport au positionnement DAF."
+    "piste": "A",
+    "atsMatch": {
+      "covered": [
+        "BFR",
+        "Excel avancé",
+        "SAP",
+        "Relation clients"
+      ],
+      "missing": [
+        "Credit management",
+        "Recouvrement / DSO",
+        "Gestion du risque client"
+      ]
+    },
+    "description": {
+      "context": "Delorme Negoce, société de négoce B2B (200 M€ de CA), recherche un credit manager pour piloter en exécution le poste client, le recouvrement et la réduction du DSO sur un portefeuille de grands comptes.",
+      "missions": [
+        "Gérer le poste client et suivre les encours sur le portefeuille grands comptes.",
+        "Piloter le recouvrement amiable et contentieux et réduire le DSO.",
+        "Évaluer et suivre le risque client en lien avec l'assurance-crédit.",
+        "Animer les relances et la relation avec les clients sur les litiges.",
+        "Produire le reporting du poste client et son impact sur le BFR."
+      ],
+      "profile": [
+        "Expérience en credit management et recouvrement en environnement B2B.",
+        "Connaissance des outils d'assurance-crédit et du risque client.",
+        "Aisance relationnelle pour les négociations de recouvrement."
+      ],
+      "skills": [
+        "Credit management",
+        "Recouvrement / DSO",
+        "Gestion du risque client",
+        "Relation clients",
+        "BFR",
+        "Excel avancé",
+        "SAP"
+      ],
+      "diploma": "Bac+4/5 finance, gestion ou école de commerce, spécialisation crédit appréciée.",
+      "salary": "70 k€ fixe",
+      "conditions": "CDI, statut cadre, présentiel complet sur site, poste de contributeur individuel rattaché au responsable comptable."
+    }
   }
 ]
