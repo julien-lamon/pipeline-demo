@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CoachLive } from "@/components/CoachLive";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getOffer, getPersona } from "@/lib/data";
 import { getProfilDoc } from "@/lib/profil";
@@ -38,8 +39,8 @@ export default async function CoachPage({
     <>
       <SiteHeader persona={persona} activeStep="coach" />
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-semibold text-muted">
-          Aperçu — version live à venir
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-strong">
+          Coach live · vrais appels Claude
         </span>
         <h1 className="mt-3 text-2xl font-bold tracking-tight">
           Coaching pour la candidature
@@ -76,21 +77,15 @@ export default async function CoachPage({
           ))}
         </ol>
 
-        <div className="mt-6 rounded-2xl border border-dashed border-border bg-surface p-5">
-          <button
-            type="button"
-            disabled
-            className="cursor-not-allowed rounded-xl bg-accent/40 px-5 py-3 font-semibold text-white"
-            aria-disabled
-            title="Disponible en version live"
-          >
-            Lancer le coach (version live)
-          </button>
-          <p className="mt-3 text-sm text-muted">
-            Bouton volontairement désactivé : cette démo ne déclenche aucun appel
-            IA. Le coaching réel (vrai modèle, dialogue, génération de CV) arrivera
-            dans une version ultérieure.
-          </p>
+        <div className="mt-6">
+          <CoachLive
+            personaId={persona.id}
+            offer={
+              offer
+                ? { id: offer.id, title: offer.title, company: offer.company }
+                : null
+            }
+          />
         </div>
 
         {doc && (

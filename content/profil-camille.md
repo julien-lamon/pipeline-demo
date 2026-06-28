@@ -28,7 +28,12 @@ et en cabinet. Autonome sur le cycle de recrutement, du brief manager au closing
 Sourcing LinkedIn Recruiter · Boolean search · Entretien structuré · ATS (Lever,
 Welcome Kit) · Recrutement tech · Marque employeur · Expérience candidat.
 
-## Hors cible
+## Lignes rouges
 
-Paie et administration du personnel (hors cœur de métier), management d'équipe
-(prématuré à ce stade de séniorité).
+À signaler explicitement si une offre les heurte :
+
+- **Management hiérarchique d'équipe** : prématuré à ce stade de séniorité (junior,
+  ~2 ans). Refus des postes qui exigent d'encadrer une équipe.
+- **Poste à dominante paie / administration du personnel** : hors cœur de métier
+  (recrutement). La paie comme activité principale est exclue.
+- **Présentiel 5 jours / 5 hors Île-de-France** : non envisageable (localisation Paris).

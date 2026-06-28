@@ -28,7 +28,13 @@ data et test-and-learn, à l'aise sur le pilotage de budgets média à six chiff
 Google Ads / Meta Ads · SEA / SEO · CRM (HubSpot) · Analytics (GA4, Looker) ·
 A/B testing · Marketing automation · Pilotage budgétaire.
 
-## Hors cible
+## Lignes rouges
 
-Community management / contenu pur (trop junior, décalé de l'acquisition), postes
-de responsable marketing très généralistes hors croissance.
+À signaler explicitement si une offre les heurte :
+
+- **Présentiel intégral (5 jours sur site)** : refusé. Le profil exige a minima de
+  l'hybride ou du télétravail.
+- **Poste à dominante community management / contenu pur** : sous le niveau acquisition
+  visé, trop junior — exclu comme activité principale.
+- **Organisation hors croissance / secteur traditionnel sous-investi** : refus des
+  structures sans dynamique d'investissement marketing.

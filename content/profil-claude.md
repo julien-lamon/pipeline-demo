@@ -29,7 +29,13 @@ multi-filiales, optimisation du BFR, projets de financement et d'ERP.
 Direction financière · Contrôle de gestion · Consolidation (IFRS) · Trésorerie /
 BFR · ERP (SAP, Oracle) · Financement / dette · Management d'équipe (10+).
 
-## Hors cible
+## Lignes rouges
 
-Postes de contributeur individuel (contrôleur de gestion, credit manager) en deçà
-du niveau direction visé ; risque de surqualification perçue.
+À signaler explicitement si une offre les heurte :
+
+- **Poste de contributeur individuel sous le niveau direction** : contrôle de gestion,
+  comptabilité ou crédit en exécution, en deçà du niveau DAF visé. Exclu (risque de
+  surqualification, pas de progression du récit).
+- **Chaîne décisionnelle longue (> 3 niveaux) ou forte politique interne** : refus des
+  organisations où l'accès direct à la direction générale n'est pas possible.
+- **Rémunération sous 75 000 € brut annuel** : plancher non négociable au stade senior.
