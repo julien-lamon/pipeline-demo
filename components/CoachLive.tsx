@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { AnalysisResult as Analysis, TailoredCV } from "@/lib/schemas";
-import { AnalysisResult } from "./AnalysisResult";
+import type { TailoredCV } from "@/lib/schemas";
+import { AnalysisModal } from "./AnalysisModal";
 import { EmailGate } from "./EmailGate";
 import { GeneratedCV } from "./GeneratedCV";
 
@@ -19,9 +19,17 @@ export function CoachLive({
 }) {
   const [offerId, setOfferId] = useState(initialOfferId ?? offers[0]?.id ?? "");
   const [gated, setGated] = useState(false);
-  const [analysis, setAnalysis] = useState<Analysis | null>(null);
+
+  // Étape 1 (analyse streamée)
+  const [analysisText, setAnalysisText] = useState("");
+  const [analysisStreaming, setAnalysisStreaming] = useState(false);
+  const [analysisDone, setAnalysisDone] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Étape 2 (CV structuré)
   const [cv, setCv] = useState<TailoredCV | null>(null);
-  const [loading, setLoading] = useState<null | "analyze" | "cv">(null);
+  const [generating, setGenerating] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -32,56 +40,94 @@ export function CoachLive({
 
   const offer = offers.find((o) => o.id === offerId);
 
-  function changeOffer(id: string) {
-    setOfferId(id);
-    // Les résultats portaient sur l'offre précédente : on repart propre.
-    setAnalysis(null);
+  function relock() {
+    setGated(false);
+    try {
+      localStorage.removeItem("coach_gated");
+    } catch {}
+  }
+
+  function resetForOffer() {
+    setAnalysisText("");
+    setAnalysisDone(false);
+    setModalOpen(false);
     setCv(null);
     setError(null);
+  }
+
+  function changeOffer(id: string) {
+    setOfferId(id);
+    resetForOffer();
   }
 
   // Re-verrouille côté client pour revoir l'étape de captation (utile en démo).
   function resetAccess() {
-    try {
-      localStorage.removeItem("coach_gated");
-    } catch {}
-    setGated(false);
-    setAnalysis(null);
-    setCv(null);
-    setError(null);
+    relock();
+    resetForOffer();
   }
 
-  async function run(kind: "analyze" | "cv") {
+  // Étape 1 : analyse narrative streamée dans le modal.
+  async function runAnalyze() {
     if (!offer) return;
-    setLoading(kind);
+    setError(null);
+    setAnalysisStreaming(true);
+    try {
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ personaId, offerId: offer.id }),
+      });
+      if (!res.ok || !res.body) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        if (res.status === 401) relock();
+        setError(data.error ?? "Une erreur est survenue.");
+        return;
+      }
+      setAnalysisText("");
+      setAnalysisDone(false);
+      setModalOpen(true);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        setAnalysisText(acc);
+      }
+      setAnalysisDone(true);
+    } catch {
+      setError("Réseau indisponible.");
+    } finally {
+      setAnalysisStreaming(false);
+    }
+  }
+
+  // Étape 2 : génération du CV (sortie structurée). Réservée à l'après-analyse.
+  async function runCv() {
+    if (!offer || !analysisDone) return;
+    setGenerating(true);
     setError(null);
     try {
-      const res = await fetch(`/api/${kind}`, {
+      const res = await fetch("/api/cv", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ personaId, offerId: offer.id }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         error?: string;
-        analysis?: Analysis;
         cv?: TailoredCV;
       };
       if (!res.ok) {
-        if (res.status === 401) {
-          setGated(false);
-          try {
-            localStorage.removeItem("coach_gated");
-          } catch {}
-        }
+        if (res.status === 401) relock();
         setError(data.error ?? "Une erreur est survenue.");
         return;
       }
-      if (kind === "analyze") setAnalysis(data.analysis ?? null);
-      else setCv(data.cv ?? null);
+      setCv(data.cv ?? null);
     } catch {
       setError("Réseau indisponible.");
     } finally {
-      setLoading(null);
+      setGenerating(false);
     }
   }
 
@@ -95,7 +141,6 @@ export function CoachLive({
 
   return (
     <div className="space-y-6">
-      {/* Sélecteur d'offre : l'écran est autonome, quel que soit le chemin d'arrivée */}
       <label className="block rounded-2xl border border-border bg-card p-4">
         <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
           Offre ciblée
@@ -113,38 +158,46 @@ export function CoachLive({
         </select>
       </label>
 
-      {/* Captation d'email : déverrouille les deux actions live */}
       {!gated ? (
         <EmailGate onUnlock={() => setGated(true)} />
       ) : (
         <div className="space-y-2">
-          <div className="flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() => run("analyze")}
-              disabled={loading !== null}
-              className="rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading === "analyze"
-                ? "Analyse en cours…"
-                : "Analyser cette offre"}
-            </button>
-            <button
-              type="button"
-              onClick={() => run("cv")}
-              disabled={loading !== null}
-              className="rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading === "cv" ? "Génération en cours…" : "Générer le CV ciblé"}
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={resetAccess}
-            className="text-xs text-ink-faint underline underline-offset-2 hover:text-muted"
-          >
-            Accès débloqué. Réinitialiser pour revoir la captation d’email.
-          </button>
+          <ol className="flex flex-col gap-3 sm:flex-row">
+            <li className="flex-1">
+              <button
+                type="button"
+                onClick={() =>
+                  analysisDone ? setModalOpen(true) : runAnalyze()
+                }
+                disabled={analysisStreaming}
+                className="w-full rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {analysisStreaming
+                  ? "Analyse en cours…"
+                  : analysisDone
+                    ? "Revoir l’analyse"
+                    : "1. Analyser cette offre"}
+              </button>
+            </li>
+            <li className="flex-1">
+              <button
+                type="button"
+                onClick={runCv}
+                disabled={!analysisDone || generating}
+                title={
+                  analysisDone ? undefined : "Lance d’abord l’analyse de l’offre"
+                }
+                className="w-full rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {generating ? "Génération en cours…" : "2. Générer le CV ciblé"}
+              </button>
+            </li>
+          </ol>
+          {!analysisDone && (
+            <p className="text-xs text-muted">
+              La génération du CV se débloque à la fin de l’analyse.
+            </p>
+          )}
         </div>
       )}
 
@@ -154,19 +207,36 @@ export function CoachLive({
         </div>
       )}
 
-      {analysis && (
-        <section>
-          <h2 className="mb-3 text-lg font-bold tracking-tight">Analyse</h2>
-          <AnalysisResult analysis={analysis} />
-        </section>
-      )}
-
       {cv && (
         <section>
           <h2 className="mb-3 text-lg font-bold tracking-tight">CV ciblé</h2>
           <GeneratedCV cv={cv} personaId={personaId} />
         </section>
       )}
+
+      {gated && (
+        <button
+          type="button"
+          onClick={resetAccess}
+          className="text-xs text-ink-faint underline underline-offset-2 hover:text-muted"
+        >
+          Accès débloqué. Réinitialiser pour revoir la captation d’email.
+        </button>
+      )}
+
+      <AnalysisModal
+        open={modalOpen}
+        offerTitle={offer ? `${offer.title} · ${offer.company}` : ""}
+        text={analysisText}
+        streaming={analysisStreaming}
+        done={analysisDone}
+        generating={generating}
+        onClose={() => setModalOpen(false)}
+        onGenerate={() => {
+          setModalOpen(false);
+          runCv();
+        }}
+      />
     </div>
   );
 }

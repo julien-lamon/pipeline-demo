@@ -59,3 +59,25 @@ export async function callStructured<T>(opts: {
   );
   return { data, cost };
 }
+
+/**
+ * Appel narratif en STREAMING (étape 1 du coach). Renvoie le flux SDK : l'appelant
+ * pipe les deltas de texte vers le client et lit l'usage via `finalMessage()` à la
+ * fin pour comptabiliser le coût. thinking désactivé (on ne streame que la sortie
+ * narrative, jamais le raisonnement interne) ; max_tokens borné.
+ */
+export function streamCoach(opts: {
+  system: string;
+  user: string;
+  maxTokens: number;
+  effort: "low" | "medium" | "high" | "max";
+}) {
+  return client.messages.stream({
+    model: MODEL,
+    max_tokens: opts.maxTokens,
+    thinking: { type: "disabled" },
+    output_config: { effort: opts.effort },
+    system: opts.system,
+    messages: [{ role: "user", content: opts.user }],
+  });
+}

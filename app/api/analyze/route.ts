@@ -1,16 +1,18 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { callStructured, ClaudeRefusalError } from "@/lib/anthropic";
-import { EFFORT, MAX_TOKENS } from "@/lib/config";
+import { streamCoach } from "@/lib/anthropic";
+import { costEur, EFFORT, MAX_TOKENS } from "@/lib/config";
 import { getOffer, getPersona } from "@/lib/data";
 import { checkAccess } from "@/lib/guards";
 import { getProfilDoc } from "@/lib/profil";
-import { buildAnalyzePrompt } from "@/lib/prompts";
-import { type AnalysisResult, ANALYSIS_SCHEMA } from "@/lib/schemas";
+import { buildAnalyzeNarrativePrompt } from "@/lib/prompts";
 import { addSpendEur, incrEmailCount } from "@/lib/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// Étape 1 du coach : analyse NARRATIVE streamée token par token. Les garde-fous du
+// brief B (email gating + plafond global + quota par email) s'appliquent ici comme
+// au CV : on vérifie l'accès avant de streamer, on comptabilise après la fin.
 export async function POST(req: NextRequest) {
   const access = await checkAccess(req);
   if (!access.ok) {
@@ -33,31 +35,54 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { system, user } = buildAnalyzePrompt(getProfilDoc(persona.id), offer);
+  const { system, user } = buildAnalyzeNarrativePrompt(
+    getProfilDoc(persona.id),
+    offer,
+  );
+  const stream = streamCoach({
+    system,
+    user,
+    maxTokens: MAX_TOKENS.analyze,
+    effort: EFFORT.analyze,
+  });
 
-  try {
-    const { data, cost } = await callStructured<AnalysisResult>({
-      system,
-      user,
-      schema: ANALYSIS_SCHEMA,
-      maxTokens: MAX_TOKENS.analyze,
-      effort: EFFORT.analyze,
-    });
-    // Comptabilisation après succès : dépense globale + quota de l'email.
-    await addSpendEur(access.date, cost);
-    await incrEmailCount(access.date, access.email);
-    return NextResponse.json({ analysis: data });
-  } catch (err) {
-    if (err instanceof ClaudeRefusalError) {
-      return NextResponse.json(
-        { error: "Le coach n'a pas pu traiter cette offre." },
-        { status: 422 },
-      );
-    }
-    console.error("analyze failed:", err);
-    return NextResponse.json(
-      { error: "Erreur lors de l'analyse. Réessayez." },
-      { status: 500 },
-    );
-  }
+  const encoder = new TextEncoder();
+  const readable = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      try {
+        for await (const event of stream) {
+          if (
+            event.type === "content_block_delta" &&
+            event.delta.type === "text_delta"
+          ) {
+            controller.enqueue(encoder.encode(event.delta.text));
+          }
+        }
+        const final = await stream.finalMessage();
+        if (final.stop_reason !== "refusal") {
+          const cost = costEur(final.usage);
+          await addSpendEur(access.date, cost);
+          await incrEmailCount(access.date, access.email);
+          console.log(
+            `[claude] stream in=${final.usage.input_tokens} out=${final.usage.output_tokens} cost=${cost.toFixed(4)}EUR`,
+          );
+        }
+      } catch (err) {
+        console.error("analyze stream failed:", err);
+        controller.enqueue(
+          encoder.encode("\n\n[Analyse interrompue. Réessaie dans un instant.]"),
+        );
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(readable, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-store",
+      "X-Accel-Buffering": "no",
+    },
+  });
 }
