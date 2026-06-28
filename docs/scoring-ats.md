@@ -1,76 +1,97 @@
 # Règle de scoring ATS (démo)
 
 > **Périmètre.** Ce document décrit comment le **score ATS** des offres de la démo
-> est fabriqué. Les scores sont **figés** dans `data/offers/*.json` : ils sont
-> calculés une fois, hors ligne, selon la règle ci-dessous, puis stockés. La démo
-> ne recalcule **rien** en direct et ne fait **aucun appel** pour scorer.
+> est fabriqué. Les scores sont **figés** dans `data/offers/*.json` : calculés une
+> fois, hors ligne, selon la règle ci-dessous, puis stockés. La démo ne recalcule
+> **rien** en direct et ne fait **aucun appel** pour scorer.
+>
+> Cette règle est **alignée sur la méthode de la skill `coach-carriere`** (outil
+> perso, `references/analyse-offre.md`), volontairement transposée ici sans coupler
+> la démo à la skill. Voir `docs/coaching-methode.md`.
 
-## 1. Ce que le score mesure (et ne mesure pas)
+## 1. Deux axes séparés
 
-Le score ATS de la démo mesure une **proximité sémantique offre ↔ profil** : à quel
-point le profil **couvre les éléments exigés par l'annonce**. C'est la logique des
-ATS réels, qui classent les candidatures sur la correspondance de mots-clés
-(compétences dures, intitulé), pas sur un jugement qualitatif.
+Une offre porte **deux indicateurs distincts** qu'on ne mélange jamais :
 
-Le score **n'inclut pas** les lignes rouges du candidat (présentiel, fourchette de
-rémunération, diplôme rédhibitoire, niveau hiérarchique, secteur). Ces critères sont
-traités **séparément** par la couche coach (analyse en langage naturel). Conséquence
-voulue : **une offre peut avoir un excellent score ATS et heurter une ligne rouge**
-(« l'ATS dit oui, le coach dit attention »). Les deux axes sont indépendants.
+1. **Score ATS** (mesurable, %) : adéquation lexicale/structurelle offre↔profil,
+   telle qu'un ATS la calculerait. C'est l'objet de ce document.
+2. **Positionnement sur l'offre** (qualitatif, 5 niveaux) : solidité du dossier,
+   intégrant le marché. Ce N'EST PAS une prédiction de réponse RH. Il est porté par
+   la couche coach, pas par le score (voir `docs/coaching-methode.md`).
 
-> Cette conception (ATS pur + coach séparé) est la **cible** de la démo. Elle diffère
-> volontairement de l'outil perso `job-pipeline`, où le score est un jugement porté
-> par un LLM. Faire converger les deux est un sujet **V2**, hors périmètre ici.
+Les **lignes rouges** du candidat (présentiel, rémunération, niveau, diplôme) n'entrent
+dans **aucun** des deux : c'est le coach qui les signale, séparément.
 
 ## 2. Sources
 
-Inspiré du fonctionnement public des ATS et des guides de matching de CV :
+Transposé de la méthode publique des ATS et de `analyse-offre.md` :
 
-- Jobscan, *Resume Match Report* et *ATS résumé optimization* :
-  `https://www.jobscan.co/` — le « match rate » repose sur les **hard skills** et la
-  **correspondance d'intitulé**, avec une cible recommandée d'environ **75 % et plus**.
+- Jobscan, *Resume Match Report* : `https://www.jobscan.co/` — le match repose sur
+  les **hard skills** et la **correspondance d'intitulé**, cible recommandée ~75 %+.
 - Jobscan, *What is an ATS?* : `https://www.jobscan.co/applicant-tracking-systems`
-- Guides ATS 2026 (principes généraux, ex. Teal, Indeed Career Guide) : un ATS pèse
-  fortement les compétences techniques et l'intitulé, **peu les soft skills**, et
-  pénalise l'absence de mots-clés exigés.
+- Guides ATS 2026 (Teal, Indeed Career Guide) : poids fort aux compétences
+  techniques et à l'intitulé, **peu aux soft skills**, pénalité sur les mots-clés
+  exigés absents.
 
-## 3. La règle (simplifiée)
+## 3. La règle (méthode skill, simplifiée)
 
-> **Avertissement.** C'est une **règle simplifiée et reproductible**, pas le calcul
-> algorithmique d'un vrai ATS. Le vrai matching (TF-IDF / similarité vectorielle sur
-> le texte complet) est une **cible V2**.
+### Étape 1 — Extraire les mots-clés critiques de l'offre
 
-Score sur 100 = somme de quatre composantes, plafonné à 100 :
+8 à 15 mots-clés ou expressions, classés en 4 catégories :
+- **Compétences techniques** (outils, méthodes, langages) ;
+- **Compétences métier** (domaines, secteurs, fonctions) ;
+- **Soft skills exigés** (comptent peu) ;
+- **Exigences administratives** (diplôme, années d'expérience, langues, mobilité).
 
-| Composante | Poids | Calcul |
-|---|---:|---|
-| **Intitulé de poste** | 30 | 30 si même famille de poste que l'intitulé cible du profil ; 18 si adjacent ; 8 si vaguement lié ; 0 si étranger. |
-| **Compétences / outils exigés** | 45 | `45 × (compétences dures exigées par l'annonce présentes dans le profil ÷ total des compétences dures exigées)`. |
-| **Diplôme / certifications exigés** | 15 | 15 si le profil satisfait l'exigence (ou aucune exigée) ; 8 si partiel ; 0 si un prérequis dur est absent. |
-| **Bonus contextualisation** | 10 | Jusqu'à 10 si le profil **chiffre** les compétences clés exigées (réalisations quantifiées). |
+### Étape 2 — Marquer la présence dans le profil
 
-- **Soft skills** (autonomie, rigueur, esprit d'équipe…) : quasi **non comptées**,
-  conforme aux ATS réels.
-- **Lignes rouges** : **n'entrent jamais** dans le score (cf. §1).
+Pour chaque mot-clé : **Présent** (1), **Partiel** (0.5, dérivé/implicite), **Absent** (0).
 
-## 4. Échelle et seuils
+### Étape 3 — Calculer le score
+
+```
+Score brut = (Présent x 1 + Partiel x 0.5) / Total des mots-clés x 100
+```
+
+Pondérations :
+- **Pénalité diplôme** : -10 si une exigence de diplôme n'est pas respectée ;
+- **Pénalité expérience** : -5 par tranche de 3 ans manquants ;
+- **Bonus intitulé exact** : +10 si l'intitulé du dernier poste correspond
+  **exactement** à l'intitulé visé.
+
+Score final borné à 0-100.
+
+### Étape 4 — Interpréter
 
 | Plage | Lecture |
 |---|---|
-| `< 65` | Adéquation faible (couverture lacunaire). |
-| `65 - 74` | Limite : pertinent mais incomplet. |
-| `75 - 85` | Bonne adéquation. |
-| `> 85` | Excellente adéquation. |
+| `> 80` | Forte adéquation : le dossier devrait passer le filtre automatique. |
+| `60 - 80` | Adéquation moyenne : passage incertain selon la rigueur du tri. |
+| `< 60` | Adéquation faible : susceptible d'être éliminé au tri sauf intervention humaine. |
 
-Seuils de la démo : **seuil de pertinence = 70** (en dessous : « sous le seuil ») ;
-**prioritaire = score ≥ 85**. Ces deux seuils vivent dans `lib/data.ts`
-(`SCORE_THRESHOLD`, `PRIORITY_MIN`).
+Seuils de la démo (badge/tri, dans `lib/data.ts`) : **seuil de pertinence = 70** ;
+**prioritaire = score >= 85**.
 
-## 5. Fabrication et figeage
+## 4. Application figée dans la démo
 
-Pour chaque offre : on liste les **compétences/outils exigés** dans son corps
-d'annonce, on les confronte aux **compétences du document de vérité** du persona
-(`content/profil-*.md`), on applique la grille du §3, et on **fige** le résultat dans
-`score`. Le champ `atsMatch` (mots-clés `covered` / `missing`) accompagne le score
-comme **justification factuelle** affichée dans l'UI ; il n'est **pas** transmis au
-coach (qui, lui, lit le corps d'annonce et raisonne séparément).
+Pour chaque offre, le jeu de mots-clés exigés est porté par `atsMatch.covered`
+(Présent) et `atsMatch.missing` (Absent) ; le score figé en découle via l'étape 3.
+
+Particularités des données actuelles (documentées et assumées) :
+- **Aucun bonus intitulé** : aucun dernier poste d'un persona ne correspond
+  *exactement* à un intitulé d'offre (ex. "Growth Marketer" vs "Growth Manager"),
+  donc +10 ne s'applique nulle part.
+- **Aucune pénalité** : les trois personas satisfont les exigences de diplôme et
+  d'expérience des offres de leur secteur (les écarts d'expérience restent < 3 ans).
+- Le score figé est donc essentiellement le **taux de couverture** des compétences
+  exigées (Présent / Total x 100), conformément à l'étape 3.
+
+> **Alignement (juin 2026).** L'ancienne règle de la démo pondérait des composantes
+> (intitulé 30 / compétences 45 / diplôme 15 / bonus 10), ce qui gonflait les scores
+> via la composante intitulé. L'alignement sur la formule de couverture ci-dessus a
+> fait **baisser la plupart des scores** (méthode plus conservatrice et éprouvée).
+> Détail du décalage dans le rapport de transposition.
+
+> **Règle simplifiée** : le vrai matching ATS (TF-IDF / similarité vectorielle sur le
+> texte complet) reste une **cible V2**. Le `Partiel` est peu utilisé ici (données
+> figées binaires couvert/manquant) ; il est conservé dans la méthode pour fidélité.
