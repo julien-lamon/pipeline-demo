@@ -16,12 +16,14 @@ export const PER_EMAIL_DAILY_QUOTA = Number(
 export const MAX_TOKENS = {
   analyze: 1536,
   cv: 3072,
+  letter: 1024,
 } as const;
 
 /** Effort de réflexion réglé bas/medium (pas de thinking coûteux inutile). */
 export const EFFORT = {
   analyze: "low",
   cv: "medium",
+  letter: "medium",
 } as const;
 
 // Tarifs claude-sonnet-4-6 en USD / million de tokens (cf. claude-api).

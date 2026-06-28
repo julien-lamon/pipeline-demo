@@ -39,6 +39,11 @@ export function buildAnalyzeNarrativePrompt(truth: string, offer: Offer) {
     "   nommément : c'est le moment le plus important de l'analyse.",
     "4. Une conclusion claire sur l'adéquation : faut-il y aller, et à quelles conditions.",
     "",
+    "Le SCORE ATS fourni est une donnée FIGÉE (proximité sémantique offre/profil) : prends-le",
+    "tel quel comme base factuelle, NE LE RECALCULE PAS, n'invente pas d'autre chiffre. Les",
+    "lignes rouges sont TON jugement, séparé du score : une offre peut avoir un bon score ATS",
+    "et heurter une ligne rouge.",
+    "",
     "Contraintes :",
     "- Ne te fonde QUE sur le document de vérité et l'offre. N'invente aucun fait.",
     "- Écris en prose continue. Pas de JSON, pas de listes techniques, pas de balises, pas de titres.",
@@ -53,6 +58,11 @@ export function buildAnalyzeNarrativePrompt(truth: string, offer: Offer) {
     "",
     "# Offre à analyser",
     offerBlock(offer),
+    "",
+    "# Score ATS (donnée figée, ne pas recalculer)",
+    `Proximité ATS : ${offer.score}/100.`,
+    `Compétences exigées couvertes : ${offer.atsMatch.covered.join(", ") || "aucune"}.`,
+    `Compétences exigées manquantes : ${offer.atsMatch.missing.join(", ") || "aucune"}.`,
   ].join("\n");
 
   return { system, user };
@@ -77,6 +87,39 @@ export function buildCvPrompt(truth: string, offer: Offer) {
     "crées pas. Si l'offre exige quelque chose que le profil n'a pas, ne le fabrique pas :",
     "liste-le dans `missingForOffer`. `tailoredFor` doit reprendre l'intitulé exact de l'offre.",
     "N'emploie jamais de tiret long (cadratin ou demi-cadratin) ; utilise le trait d'union simple (-).",
+  ].join("\n");
+
+  const user = [
+    "# Document de vérité du profil (source unique)",
+    truth.trim(),
+    "",
+    "# Offre cible",
+    offerBlock(offer),
+  ].join("\n");
+
+  return { system, user };
+}
+
+export function buildLetterPrompt(truth: string, offer: Offer) {
+  const system = [
+    "Tu rédiges une LETTRE DE MOTIVATION en français, à la volée, personnalisée pour l'offre.",
+    "Sources de faits autorisées : UNIQUEMENT le document de vérité du profil et le corps de l'offre.",
+    "",
+    "Contraintes de rédaction (consensus recruteurs) :",
+    "- Longueur : 250 à 350 mots, plafond dur d'environ 1800 signes. Une page maximum.",
+    "- Structure 'Vous / Moi / Nous' : l'entreprise et l'offre d'abord, puis ce que le candidat",
+    "  apporte, puis la convergence (apport commun).",
+    "- NE PARAPHRASE PAS le CV : apporte du contexte et un angle, pas une liste d'expériences.",
+    "- Ton direct, pas de formules creuses ('je me permets', 'vivement intéressé', 'dynamique').",
+    "  Reprends le vocabulaire de l'offre.",
+    "- INTÉGRITÉ : n'invente AUCUNE expérience, compétence, diplôme ou chiffre absent du document",
+    "  de vérité.",
+    "- Texte SIMPLE, sans mise en forme riche (pas de markdown, pas de gras, pas de balises).",
+    "  Pas d'objet ni d'en-tête d'adresse : juste le corps de la lettre, prêt à coller dans un",
+    "  email. Tu peux terminer par une formule de politesse brève et le nom du candidat.",
+    "- N'emploie jamais de tiret long (cadratin ou demi-cadratin) ; utilise le trait d'union (-).",
+    "",
+    "Réponds uniquement via le champ `letter` (le texte intégral de la lettre).",
   ].join("\n");
 
   const user = [

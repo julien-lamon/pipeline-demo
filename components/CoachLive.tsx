@@ -5,6 +5,7 @@ import type { TailoredCV } from "@/lib/schemas";
 import { AnalysisModal } from "./AnalysisModal";
 import { EmailGate } from "./EmailGate";
 import { GeneratedCV } from "./GeneratedCV";
+import { GeneratedLetter } from "./GeneratedLetter";
 
 type OfferRef = { id: string; title: string; company: string };
 
@@ -29,6 +30,10 @@ export function CoachLive({
   // Étape 2 (CV structuré)
   const [cv, setCv] = useState<TailoredCV | null>(null);
   const [generating, setGenerating] = useState(false);
+
+  // Étape 4 (lettre de motivation)
+  const [letter, setLetter] = useState<string | null>(null);
+  const [lettering, setLettering] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -59,6 +64,7 @@ export function CoachLive({
             analysisText?: string;
             analysisDone?: boolean;
             cv?: TailoredCV | null;
+            letter?: string | null;
           })
         : null;
       // Une URL ?offer force une cible précise ; sinon on restaure la dernière.
@@ -70,6 +76,7 @@ export function CoachLive({
         setAnalysisText(saved.analysisText ?? "");
         setAnalysisDone(Boolean(saved.analysisDone));
         setCv(saved.cv ?? null);
+        setLetter(saved.letter ?? null);
       }
     } catch {}
     setHydrated(true);
@@ -82,10 +89,10 @@ export function CoachLive({
     try {
       sessionStorage.setItem(
         storageKey,
-        JSON.stringify({ offerId, analysisText, analysisDone, cv }),
+        JSON.stringify({ offerId, analysisText, analysisDone, cv, letter }),
       );
     } catch {}
-  }, [hydrated, storageKey, offerId, analysisText, analysisDone, cv]);
+  }, [hydrated, storageKey, offerId, analysisText, analysisDone, cv, letter]);
 
   const offer = offers.find((o) => o.id === offerId);
 
@@ -101,6 +108,7 @@ export function CoachLive({
     setAnalysisDone(false);
     setModalOpen(false);
     setCv(null);
+    setLetter(null);
     setError(null);
   }
 
@@ -180,6 +188,36 @@ export function CoachLive({
     }
   }
 
+  // Étape 4 : lettre de motivation (sortie structurée, texte simple).
+  // Gating après l'analyse (pas après le CV) : la LM se génère depuis le document
+  // de vérité + l'offre, indépendamment du CV ; on évite de forcer un appel CV.
+  async function runLetter() {
+    if (!offer || !analysisDone) return;
+    setLettering(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/letter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ personaId, offerId: offer.id }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        letter?: string;
+      };
+      if (!res.ok) {
+        if (res.status === 401) relock();
+        setError(data.error ?? "Une erreur est survenue.");
+        return;
+      }
+      setLetter(data.letter ?? null);
+    } catch {
+      setError("Réseau indisponible.");
+    } finally {
+      setLettering(false);
+    }
+  }
+
   if (offers.length === 0) {
     return (
       <p className="rounded-2xl border border-dashed border-border bg-surface p-5 text-sm text-muted">
@@ -241,10 +279,23 @@ export function CoachLive({
                 {generating ? "Génération en cours…" : "2. Générer le CV ciblé"}
               </button>
             </li>
+            <li className="flex-1">
+              <button
+                type="button"
+                onClick={runLetter}
+                disabled={!analysisDone || lettering}
+                title={
+                  analysisDone ? undefined : "Lance d’abord l’analyse de l’offre"
+                }
+                className="w-full rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {lettering ? "Rédaction en cours…" : "3. Générer la lettre"}
+              </button>
+            </li>
           </ol>
           {!analysisDone && (
             <p className="text-xs text-muted">
-              La génération du CV se débloque à la fin de l’analyse.
+              Le CV et la lettre se débloquent à la fin de l’analyse.
             </p>
           )}
         </div>
@@ -260,6 +311,15 @@ export function CoachLive({
         <section>
           <h2 className="mb-3 text-lg font-bold tracking-tight">CV ciblé</h2>
           <GeneratedCV cv={cv} personaId={personaId} />
+        </section>
+      )}
+
+      {letter && (
+        <section>
+          <h2 className="mb-3 text-lg font-bold tracking-tight">
+            Lettre de motivation
+          </h2>
+          <GeneratedLetter initial={letter} />
         </section>
       )}
 

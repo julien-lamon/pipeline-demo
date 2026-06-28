@@ -105,3 +105,19 @@ export const CV_SCHEMA = {
     "missingForOffer",
   ],
 } as const;
+
+// --- Lettre de motivation ---------------------------------------------------
+
+export interface CoverLetter {
+  /** Corps de la lettre, texte simple, prêt à coller dans un email. */
+  letter: string;
+}
+
+export const COVER_LETTER_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    letter: { type: "string" },
+  },
+  required: ["letter"],
+} as const;
