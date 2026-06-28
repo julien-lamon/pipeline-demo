@@ -36,8 +36,10 @@ export default function Home() {
               De la veille d’offres au CV taillé pour le poste.
             </h1>
             <p className="mt-4 max-w-md text-lg leading-relaxed text-muted">
-              Pipeline trie les offres par pertinence, vous coache sur celle qui
-              compte, puis adapte votre CV à l’intitulé visé.
+              <span className="font-semibold text-accent-strong">Pipeline</span>{" "}
+              trie les offres d’emploi par pertinence, vous coache sur celles qui
+              comptent, puis adapte votre CV et votre lettre de motivation au
+              poste visé. Vous n’avez plus qu’à relire et valider.
             </p>
           </div>
           <Image
