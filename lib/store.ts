@@ -40,6 +40,10 @@ async function kv(args: (string | number)[]): Promise<unknown> {
 interface FileShape {
   spend: Record<string, number>;
   quota: Record<string, number>;
+  /** Marqueurs "déjà généré" par email/jour/type/offre (anti re-clic et anti-script). */
+  gen: Record<string, string>;
+  /** Dernière génération (epoch ms) par email/type, pour le throttle. */
+  last: Record<string, number>;
   gate: Record<string, { ts: string; purpose: string }>;
 }
 
@@ -47,9 +51,16 @@ const FILE_PATH = join(process.cwd(), ".data", "store.json");
 
 async function readFileStore(): Promise<FileShape> {
   try {
-    return JSON.parse(await readFile(FILE_PATH, "utf8")) as FileShape;
+    const raw = JSON.parse(await readFile(FILE_PATH, "utf8")) as Partial<FileShape>;
+    return {
+      spend: raw.spend ?? {},
+      quota: raw.quota ?? {},
+      gen: raw.gen ?? {},
+      last: raw.last ?? {},
+      gate: raw.gate ?? {},
+    };
   } catch {
-    return { spend: {}, quota: {}, gate: {} };
+    return { spend: {}, quota: {}, gen: {}, last: {}, gate: {} };
   }
 }
 
@@ -64,6 +75,15 @@ const spendKey = (date: string) => `coach:spend:${date}`;
 const quotaKey = (date: string, email: string) =>
   `coach:quota:${date}:${encodeURIComponent(email)}`;
 const gateKey = (email: string) => `coach:gate:${encodeURIComponent(email)}`;
+const genKey = (
+  date: string,
+  email: string,
+  kind: string,
+  personaId: string,
+  offerId: string,
+) => `coach:gen:${date}:${encodeURIComponent(email)}:${kind}:${personaId}:${offerId}`;
+const lastKey = (email: string, kind: string) =>
+  `coach:last:${encodeURIComponent(email)}:${kind}`;
 
 /** Dépense cumulée du jour (euros). */
 export async function getSpendEur(date: string): Promise<number> {
@@ -111,6 +131,65 @@ export async function incrEmailCount(
   const store = await readFileStore();
   const k = `${date}:${email}`;
   store.quota[k] = (store.quota[k] ?? 0) + 1;
+  await writeFileStore(store);
+}
+
+/** Une génération (CV ou LM) a-t-elle déjà eu lieu pour ce couple email/type/offre ? */
+export async function hasGenerated(
+  date: string,
+  email: string,
+  kind: string,
+  personaId: string,
+  offerId: string,
+): Promise<boolean> {
+  const k = genKey(date, email, kind, personaId, offerId);
+  if (useKv) return Boolean(await kv(["GET", k]));
+  return Boolean((await readFileStore()).gen[k]);
+}
+
+/** Marque une génération comme effectuée (TTL 2 jours). */
+export async function markGenerated(
+  date: string,
+  email: string,
+  kind: string,
+  personaId: string,
+  offerId: string,
+): Promise<void> {
+  const k = genKey(date, email, kind, personaId, offerId);
+  if (useKv) {
+    await kv(["SET", k, "1"]);
+    await kv(["EXPIRE", k, TTL_SECONDS]);
+    return;
+  }
+  const store = await readFileStore();
+  store.gen[k] = "1";
+  await writeFileStore(store);
+}
+
+/** Horodatage (epoch ms) de la dernière génération de ce type par cet email. 0 si aucune. */
+export async function getLastGenMs(email: string, kind: string): Promise<number> {
+  const k = lastKey(email, kind);
+  if (useKv) {
+    const v = await kv(["GET", k]);
+    return v ? Number(v) : 0;
+  }
+  return (await readFileStore()).last[k] ?? 0;
+}
+
+/** Mémorise l'instant de la dernière génération de ce type (pour le throttle). */
+export async function setLastGenMs(
+  email: string,
+  kind: string,
+  ms: number,
+): Promise<void> {
+  const k = lastKey(email, kind);
+  if (useKv) {
+    await kv(["SET", k, ms]);
+    await kv(["EXPIRE", k, TTL_SECONDS]);
+    return;
+  }
+  const store = await readFileStore();
+  store.last[k] = ms;
   await writeFileStore(store);
 }
 

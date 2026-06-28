@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TailoredCV } from "@/lib/schemas";
 import { AnalysisModal } from "./AnalysisModal";
 import { EmailGate } from "./EmailGate";
@@ -41,6 +41,10 @@ export function CoachLive({
   // fil d'Ariane, et sont purgés au changement de persona. sessionStorage = visite.
   const storageKey = `coach-state:${personaId}`;
   const [hydrated, setHydrated] = useState(false);
+
+  // A5 : ancre + drapeau pour défiler vers la lettre à sa première génération.
+  const letterRef = useRef<HTMLElement | null>(null);
+  const scrollLetterOnRender = useRef(false);
 
   useEffect(() => {
     try {
@@ -93,6 +97,14 @@ export function CoachLive({
       );
     } catch {}
   }, [hydrated, storageKey, offerId, analysisText, analysisDone, cv, letter]);
+
+  // A5 : défile vers la lettre quand elle vient d'être générée pour la 1re fois.
+  useEffect(() => {
+    if (letter && scrollLetterOnRender.current) {
+      scrollLetterOnRender.current = false;
+      letterRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [letter]);
 
   const offer = offers.find((o) => o.id === offerId);
 
@@ -161,7 +173,8 @@ export function CoachLive({
   }
 
   // Étape 2 : génération du CV (sortie structurée). Réservée à l'après-analyse.
-  async function runCv() {
+  // regenerate=true : régénération volontaire (re-déclenche un appel côté serveur).
+  async function runCv(regenerate = false) {
     if (!offer || !analysisDone) return;
     setGenerating(true);
     setError(null);
@@ -169,7 +182,7 @@ export function CoachLive({
       const res = await fetch("/api/cv", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ personaId, offerId: offer.id }),
+        body: JSON.stringify({ personaId, offerId: offer.id, regenerate }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         error?: string;
@@ -191,7 +204,7 @@ export function CoachLive({
   // Étape 4 : lettre de motivation (sortie structurée, texte simple).
   // Gating après l'analyse (pas après le CV) : la LM se génère depuis le document
   // de vérité + l'offre, indépendamment du CV ; on évite de forcer un appel CV.
-  async function runLetter() {
+  async function runLetter(regenerate = false) {
     if (!offer || !analysisDone) return;
     setLettering(true);
     setError(null);
@@ -199,7 +212,7 @@ export function CoachLive({
       const res = await fetch("/api/letter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ personaId, offerId: offer.id }),
+        body: JSON.stringify({ personaId, offerId: offer.id, regenerate }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         error?: string;
@@ -210,6 +223,8 @@ export function CoachLive({
         setError(data.error ?? "Une erreur est survenue.");
         return;
       }
+      // A5 : défilement auto seulement à la PREMIÈRE génération (pas en régénération).
+      scrollLetterOnRender.current = letter === null;
       setLetter(data.letter ?? null);
     } catch {
       setError("Réseau indisponible.");
@@ -269,27 +284,35 @@ export function CoachLive({
             <li className="flex-1">
               <button
                 type="button"
-                onClick={runCv}
-                disabled={!analysisDone || generating}
+                onClick={() => runCv()}
+                disabled={!analysisDone || generating || cv !== null}
                 title={
                   analysisDone ? undefined : "Lance d’abord l’analyse de l’offre"
                 }
                 className="w-full rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {generating ? "Génération en cours…" : "2. Générer le CV ciblé"}
+                {generating
+                  ? "Génération en cours…"
+                  : cv
+                    ? "2. CV généré ✓"
+                    : "2. Générer le CV ciblé"}
               </button>
             </li>
             <li className="flex-1">
               <button
                 type="button"
-                onClick={runLetter}
-                disabled={!analysisDone || lettering}
+                onClick={() => runLetter()}
+                disabled={!analysisDone || lettering || letter !== null}
                 title={
                   analysisDone ? undefined : "Lance d’abord l’analyse de l’offre"
                 }
                 className="w-full rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {lettering ? "Rédaction en cours…" : "3. Générer la lettre"}
+                {lettering
+                  ? "Rédaction en cours…"
+                  : letter
+                    ? "3. Lettre générée ✓"
+                    : "3. Générer la lettre"}
               </button>
             </li>
           </ol>
@@ -309,16 +332,40 @@ export function CoachLive({
 
       {cv && (
         <section>
-          <h2 className="mb-3 text-lg font-bold tracking-tight">CV ciblé</h2>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold tracking-tight">CV ciblé</h2>
+            <button
+              type="button"
+              onClick={() => runCv(true)}
+              disabled={generating}
+              className="text-xs font-semibold text-accent-strong underline underline-offset-2 transition hover:text-accent disabled:opacity-50"
+            >
+              {generating ? "Régénération…" : "Régénérer"}
+            </button>
+          </div>
           <GeneratedCV cv={cv} personaId={personaId} />
         </section>
       )}
 
       {letter && (
-        <section>
-          <h2 className="mb-3 text-lg font-bold tracking-tight">
-            Lettre de motivation
-          </h2>
+        <section ref={letterRef} className="scroll-mt-20">
+          <div className="mb-1 flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold tracking-tight">
+              Lettre de motivation
+            </h2>
+            <button
+              type="button"
+              onClick={() => runLetter(true)}
+              disabled={lettering}
+              className="text-xs font-semibold text-accent-strong underline underline-offset-2 transition hover:text-accent disabled:opacity-50"
+            >
+              {lettering ? "Régénération…" : "Régénérer"}
+            </button>
+          </div>
+          <p className="mb-3 text-sm text-muted">
+            Vous pouvez modifier la lettre comme vous le souhaitez directement
+            avant de la copier.
+          </p>
           <GeneratedLetter initial={letter} />
         </section>
       )}
@@ -343,7 +390,7 @@ export function CoachLive({
         onClose={() => setModalOpen(false)}
         onGenerate={() => {
           setModalOpen(false);
-          runCv();
+          if (!cv) runCv();
         }}
       />
     </div>
