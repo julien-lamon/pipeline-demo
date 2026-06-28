@@ -32,11 +32,60 @@ export function CoachLive({
 
   const [error, setError] = useState<string | null>(null);
 
+  // Persistance par persona : l'analyse + le CV survivent à la navigation dans le
+  // fil d'Ariane, et sont purgés au changement de persona. sessionStorage = visite.
+  const storageKey = `coach-state:${personaId}`;
+  const [hydrated, setHydrated] = useState(false);
+
   useEffect(() => {
     try {
       if (localStorage.getItem("coach_gated") === "1") setGated(true);
     } catch {}
   }, []);
+
+  // Restaure l'état du coach pour CE persona ; purge celui des AUTRES personas.
+  useEffect(() => {
+    try {
+      for (let i = sessionStorage.length - 1; i >= 0; i -= 1) {
+        const k = sessionStorage.key(i);
+        if (k && k.startsWith("coach-state:") && k !== storageKey) {
+          sessionStorage.removeItem(k);
+        }
+      }
+      const raw = sessionStorage.getItem(storageKey);
+      const saved = raw
+        ? (JSON.parse(raw) as {
+            offerId?: string;
+            analysisText?: string;
+            analysisDone?: boolean;
+            cv?: TailoredCV | null;
+          })
+        : null;
+      // Une URL ?offer force une cible précise ; sinon on restaure la dernière.
+      const forced = Boolean(initialOfferId && initialOfferId !== saved?.offerId);
+      if (saved && !forced) {
+        if (saved.offerId && offers.some((o) => o.id === saved.offerId)) {
+          setOfferId(saved.offerId);
+        }
+        setAnalysisText(saved.analysisText ?? "");
+        setAnalysisDone(Boolean(saved.analysisDone));
+        setCv(saved.cv ?? null);
+      }
+    } catch {}
+    setHydrated(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Persiste l'analyse + le CV + l'offre ciblée (après hydratation).
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      sessionStorage.setItem(
+        storageKey,
+        JSON.stringify({ offerId, analysisText, analysisDone, cv }),
+      );
+    } catch {}
+  }, [hydrated, storageKey, offerId, analysisText, analysisDone, cv]);
 
   const offer = offers.find((o) => o.id === offerId);
 
