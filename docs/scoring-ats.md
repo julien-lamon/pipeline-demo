@@ -57,7 +57,13 @@ Pondérations :
 - **Pénalité diplôme** : -10 si une exigence de diplôme n'est pas respectée ;
 - **Pénalité expérience** : -5 par tranche de 3 ans manquants ;
 - **Bonus intitulé exact** : +10 si l'intitulé du dernier poste correspond
-  **exactement** à l'intitulé visé.
+  **exactement** à l'intitulé visé ;
+- **Malus de surqualification** : -15 à -20 lorsque (a) la séniorité du profil dépasse
+  **nettement** le niveau du poste ET (b) la couverture brute est quasi totale
+  (**>= 90 %**). C'est le cas où un score de couverture **surévaluerait** l'adéquation :
+  un profil très senior coche tous les mots-clés d'un poste sous son niveau et
+  ressortirait artificiellement en tête. Hors cette configuration, la surqualification
+  n'entre PAS dans le score : elle est portée par le **positionnement** (qualitatif).
 
 Score final borné à 0-100.
 
@@ -81,10 +87,18 @@ Particularités des données actuelles (documentées et assumées) :
 - **Aucun bonus intitulé** : aucun dernier poste d'un persona ne correspond
   *exactement* à un intitulé d'offre (ex. "Growth Marketer" vs "Growth Manager"),
   donc +10 ne s'applique nulle part.
-- **Aucune pénalité** : les trois personas satisfont les exigences de diplôme et
-  d'expérience des offres de leur secteur (les écarts d'expérience restent < 3 ans).
-- Le score figé est donc essentiellement le **taux de couverture** des compétences
-  exigées (Présent / Total x 100), conformément à l'étape 3.
+- **Aucune pénalité diplôme/expérience** : les trois personas satisfont les exigences
+  de diplôme et d'expérience des offres de leur secteur (écarts d'expérience < 3 ans).
+- **Un seul malus de surqualification, sur `fi-2`.** Claude R. (niveau DAF) couvre
+  **100 %** des compétences d'un poste de "Responsable du contrôle de gestion",
+  nettement sous son niveau. Calcul : couverture brute 100 -> malus **-18** ->
+  **score figé 82**. C'est la **seule** offre du jeu à réunir les deux conditions :
+  la condition (b) couverture >= 90 % n'est atteinte QUE par `fi-2` (toutes les autres
+  offres sont <= 89 %), donc le malus ne peut s'appliquer qu'à elle. Sa surqualification
+  reste par ailleurs traitée par le **positionnement (Moyen)** et la **ligne rouge
+  rémunération**.
+- Pour les autres offres, le score figé est essentiellement le **taux de couverture**
+  des compétences exigées (Présent / Total x 100), conformément à l'étape 3.
 
 > **Alignement (juin 2026).** L'ancienne règle de la démo pondérait des composantes
 > (intitulé 30 / compétences 45 / diplôme 15 / bonus 10), ce qui gonflait les scores
