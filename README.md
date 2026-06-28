@@ -78,8 +78,8 @@ sécurité) — la clé passe exclusivement par l'environnement serveur.
 2. **Offres scorées** (`/p/[persona]/offres`) — liste triée par score, badges
    colorés par niveau, marquage *prioritaire* / *sous le seuil*, recherche et
    filtres décoratifs.
-3. **Détail offre** (`/p/[persona]/offres/[offerId]`) — score détaillé
-   (score ATS, chances d'entretien, piste A/B, notes) + bouton *Coacher*.
+3. **Détail offre** (`/p/[persona]/offres/[offerId]`) — score ATS, positionnement
+   sur l'offre (5 niveaux), piste A/B, annonce intégrale + bouton *Coacher*.
 4. **Coach** (`/p/[persona]/coach`) — **stub** : explique ce que fera le coach
    live, CTA désactivé, aucun appel réel.
 5. **CV cible** (`/p/[persona]/cv`) — aperçu **statique** d'un CV d'exemple,

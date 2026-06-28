@@ -65,21 +65,25 @@ export default async function OfferDetailPage({
         {/* Axe ATS (proximité) — séparé des lignes rouges, qui sont du ressort du coach */}
         <section className="mt-6 rounded-2xl border border-border bg-card p-5">
           <h2 className="text-sm font-bold uppercase tracking-wider text-accent-strong">
-            Score ATS
+            Score ATS et positionnement
           </h2>
           <dl className="mt-4 grid gap-4 sm:grid-cols-3">
             <Metric label="Proximité ATS" value={`${offer.score}/100`} />
-            <Metric label="Chances d’entretien" value={offer.chancesEntretien} />
+            <Metric
+              label="Positionnement sur l’offre"
+              value={offer.positionnement}
+            />
             <Metric
               label="Piste"
               value={PISTE_LABEL[offer.piste] ?? offer.piste}
             />
           </dl>
           <p className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-muted">
-            Le score mesure la proximité sémantique offre/profil (couverture des
-            compétences exigées). Les lignes rouges du candidat (présentiel,
-            rémunération, niveau, diplôme) n’entrent pas dans le score : c’est le
-            coach qui les signale.
+            Le score ATS mesure la proximité sémantique offre/profil (couverture
+            des compétences exigées). Le positionnement est la solidité du dossier
+            sur 5 niveaux, calibrée sur le marché : ce n’est pas une prédiction de
+            réponse. Les lignes rouges (présentiel, rémunération, niveau, diplôme)
+            n’entrent dans aucun des deux : c’est le coach qui les signale.
           </p>
           {offer.atsMatch.covered.length > 0 && (
             <KeywordRow label="Couvert" tone="ok" items={offer.atsMatch.covered} />

@@ -3,8 +3,14 @@
 /** Piste stratégique : A = court terme / cash, B = positionnement long terme. */
 export type Piste = "A" | "B";
 
-/** Estimation qualitative des chances d'obtenir un entretien. */
-export type Chances = "Faibles" | "Moyennes" | "Élevées";
+/** Positionnement du dossier face à l'offre : solidité qualitative, PAS une prédiction
+ *  de réponse RH. Calibré baissier (le haut de l'échelle est réservé au différenciateur rare). */
+export type Positionnement =
+  | "Très faible"
+  | "Faible"
+  | "Moyen"
+  | "Fort"
+  | "Très fort";
 
 /** Niveau de score, dérivé du score global (voir lib/data.ts). */
 export type ScoreLevel = "high" | "mid" | "low";
@@ -47,7 +53,7 @@ export interface Offer {
   tags: string[];
   /** Score ATS = proximité sémantique offre/profil (cf. docs/scoring-ats.md). Figé, 0-100. */
   score: number;
-  chancesEntretien: Chances;
+  positionnement: Positionnement;
   piste: Piste;
   atsMatch: OfferAtsMatch;
   description: OfferDescription;

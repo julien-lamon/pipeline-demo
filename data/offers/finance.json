@@ -7,9 +7,13 @@
     "location": "Paris 9e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["DAF", "ETI", "Direction financière"],
-    "score": 92,
-    "chancesEntretien": "Élevées",
+    "tags": [
+      "DAF",
+      "ETI",
+      "Direction financière"
+    ],
+    "score": 89,
+    "positionnement": "Fort",
     "piste": "B",
     "atsMatch": {
       "covered": [
@@ -22,7 +26,9 @@
         "SAP FI/CO",
         "Management d'équipe finance"
       ],
-      "missing": ["Consolidation sous Tagetik"]
+      "missing": [
+        "Consolidation sous Tagetik"
+      ]
     },
     "description": {
       "context": "Helvetia Croissance, ETI agroalimentaire (290 M€ de CA, 5 filiales) en forte croissance externe, crée un poste de DAF rattaché directement au directeur général pour structurer la direction financière et accompagner deux acquisitions prévues sur 18 mois.",
@@ -64,9 +70,13 @@
     "location": "Lyon",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Contrôle de gestion", "Reporting", "Distribution"],
-    "score": 83,
-    "chancesEntretien": "Moyennes",
+    "tags": [
+      "Contrôle de gestion",
+      "Reporting",
+      "Distribution"
+    ],
+    "score": 96,
+    "positionnement": "Moyen",
     "piste": "B",
     "atsMatch": {
       "covered": [
@@ -119,9 +129,13 @@
     "location": "Paris La Défense",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Direction financière", "Grand groupe", "Reporting"],
-    "score": 80,
-    "chancesEntretien": "Moyennes",
+    "tags": [
+      "Direction financière",
+      "Grand groupe",
+      "Reporting"
+    ],
+    "score": 73,
+    "positionnement": "Moyen",
     "piste": "B",
     "atsMatch": {
       "covered": [
@@ -181,9 +195,13 @@
     "location": "Nantes",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Contrôle de gestion", "Énergie", "Pilotage"],
-    "score": 72,
-    "chancesEntretien": "Moyennes",
+    "tags": [
+      "Contrôle de gestion",
+      "Énergie",
+      "Pilotage"
+    ],
+    "score": 75,
+    "positionnement": "Faible",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -194,7 +212,10 @@
         "Power BI",
         "SAP CO"
       ],
-      "missing": ["Anaplan", "Modélisation VBA"]
+      "missing": [
+        "Anaplan",
+        "Modélisation VBA"
+      ]
     },
     "description": {
       "context": "Brassac Energie, acteur des énergies renouvelables (110 M€ de CA), renforce son équipe de contrôle de gestion et recherche un contrôleur de gestion senior, poste de contributeur individuel rattaché au responsable du contrôle de gestion.",
@@ -233,9 +254,13 @@
     "location": "Roissy",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["Crédit", "Recouvrement", "Négoce"],
-    "score": 52,
-    "chancesEntretien": "Faibles",
+    "tags": [
+      "Crédit",
+      "Recouvrement",
+      "Négoce"
+    ],
+    "score": 57,
+    "positionnement": "Très faible",
     "piste": "A",
     "atsMatch": {
       "covered": [

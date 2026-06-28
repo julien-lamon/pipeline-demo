@@ -7,9 +7,13 @@
     "location": "Paris 2e",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["Growth", "Acquisition", "Scale-up"],
-    "score": 95,
-    "chancesEntretien": "Élevées",
+    "tags": [
+      "Growth",
+      "Acquisition",
+      "Scale-up"
+    ],
+    "score": 89,
+    "positionnement": "Fort",
     "piste": "B",
     "atsMatch": {
       "covered": [
@@ -22,7 +26,9 @@
         "CRM HubSpot",
         "Pilotage CAC/ROAS"
       ],
-      "missing": ["SQL avancé"]
+      "missing": [
+        "SQL avancé"
+      ]
     },
     "description": {
       "context": "Velora est une fintech B2C en série B qui structure sa cellule growth pour passer le cap des 100 000 clients. Le poste prend la responsabilité complète des canaux d'acquisition payants.",
@@ -64,9 +70,13 @@
     "location": "Paris 9e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Acquisition", "Paid", "E-commerce"],
-    "score": 88,
-    "chancesEntretien": "Élevées",
+    "tags": [
+      "Acquisition",
+      "Paid",
+      "E-commerce"
+    ],
+    "score": 78,
+    "positionnement": "Moyen",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -78,7 +88,10 @@
         "Acquisition multicanale",
         "Gestion budgétaire média"
       ],
-      "missing": ["Amazon Ads", "ASO mobile"]
+      "missing": [
+        "Amazon Ads",
+        "ASO mobile"
+      ]
     },
     "description": {
       "context": "Brindo est une scale-up e-commerce qui accélère son acquisition payante sur plusieurs marchés européens. Le poste pilote la croissance des canaux paid et l'efficacité média.",
@@ -119,9 +132,13 @@
     "location": "Nantes",
     "contract": "Freelance",
     "remote": "Télétravail",
-    "tags": ["Marketing digital", "CRM", "Automation"],
-    "score": 75,
-    "chancesEntretien": "Moyennes",
+    "tags": [
+      "Marketing digital",
+      "CRM",
+      "Automation"
+    ],
+    "score": 60,
+    "positionnement": "Moyen",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -179,12 +196,21 @@
     "location": "Paris 11e",
     "contract": "CDD",
     "remote": "Hybride",
-    "tags": ["Social media", "Contenu", "Community"],
-    "score": 45,
-    "chancesEntretien": "Faibles",
+    "tags": [
+      "Social media",
+      "Contenu",
+      "Community"
+    ],
+    "score": 44,
+    "positionnement": "Faible",
     "piste": "A",
     "atsMatch": {
-      "covered": ["Meta Ads", "Copywriting d'annonces", "GA4", "A/B testing"],
+      "covered": [
+        "Meta Ads",
+        "Copywriting d'annonces",
+        "GA4",
+        "A/B testing"
+      ],
       "missing": [
         "Community management",
         "Production de contenu vidéo",
@@ -232,12 +258,21 @@
     "location": "Lille",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Marketing digital", "Presse", "SEO"],
-    "score": 67,
-    "chancesEntretien": "Faibles",
+    "tags": [
+      "Marketing digital",
+      "Presse",
+      "SEO"
+    ],
+    "score": 44,
+    "positionnement": "Faible",
     "piste": "B",
     "atsMatch": {
-      "covered": ["SEO technique", "GA4", "Google Ads", "Looker Studio"],
+      "covered": [
+        "SEO technique",
+        "GA4",
+        "Google Ads",
+        "Looker Studio"
+      ],
       "missing": [
         "SEO local (Google Business Profile)",
         "Adobe InDesign",

@@ -7,9 +7,13 @@
     "location": "Lyon",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["Recrutement IT", "Sourcing", "ESN"],
-    "score": 88,
-    "chancesEntretien": "Élevées",
+    "tags": [
+      "Recrutement IT",
+      "Sourcing",
+      "ESN"
+    ],
+    "score": 78,
+    "positionnement": "Fort",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -65,9 +69,13 @@
     "location": "Paris 2e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["Talent Acquisition", "Marque employeur", "Scale-up"],
-    "score": 95,
-    "chancesEntretien": "Élevées",
+    "tags": [
+      "Talent Acquisition",
+      "Marque employeur",
+      "Scale-up"
+    ],
+    "score": 89,
+    "positionnement": "Moyen",
     "piste": "B",
     "atsMatch": {
       "covered": [
@@ -122,9 +130,13 @@
     "location": "Boulogne-Billancourt",
     "contract": "CDD",
     "remote": "Sur site",
-    "tags": ["Recrutement", "Volume", "Cabinet"],
-    "score": 76,
-    "chancesEntretien": "Moyennes",
+    "tags": [
+      "Recrutement",
+      "Volume",
+      "Cabinet"
+    ],
+    "score": 63,
+    "positionnement": "Moyen",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -176,9 +188,13 @@
     "location": "Gennevilliers",
     "contract": "CDI",
     "remote": "Sur site",
-    "tags": ["Paie", "ADP", "SIRH"],
-    "score": 44,
-    "chancesEntretien": "Faibles",
+    "tags": [
+      "Paie",
+      "ADP",
+      "SIRH"
+    ],
+    "score": 38,
+    "positionnement": "Très faible",
     "piste": "A",
     "atsMatch": {
       "covered": [
@@ -231,9 +247,13 @@
     "location": "Paris 8e",
     "contract": "CDI",
     "remote": "Hybride",
-    "tags": ["RH généraliste", "Management", "Relations sociales"],
-    "score": 55,
-    "chancesEntretien": "Faibles",
+    "tags": [
+      "RH généraliste",
+      "Management",
+      "Relations sociales"
+    ],
+    "score": 42,
+    "positionnement": "Faible",
     "piste": "B",
     "atsMatch": {
       "covered": [
