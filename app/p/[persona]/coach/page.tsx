@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CoachLive } from "@/components/CoachLive";
 import { SiteHeader } from "@/components/SiteHeader";
-import { getOffer, getPersona } from "@/lib/data";
+import { getOffers, getPersona } from "@/lib/data";
 import { getProfilDoc } from "@/lib/profil";
 
 const STEPS = [
@@ -32,7 +32,11 @@ export default async function CoachPage({
   const persona = getPersona(personaId);
   if (!persona) notFound();
 
-  const offer = offerId ? getOffer(personaId, offerId) : undefined;
+  const offers = getOffers(personaId).map((o) => ({
+    id: o.id,
+    title: o.title,
+    company: o.company,
+  }));
   const doc = getProfilDoc(personaId);
 
   return (
@@ -46,17 +50,10 @@ export default async function CoachPage({
           Coaching pour la candidature
         </h1>
 
-        {offer ? (
-          <p className="mt-1 text-muted">
-            Poste ciblé :{" "}
-            <span className="font-semibold text-foreground">{offer.title}</span>{" "}
-            chez {offer.company}.
-          </p>
-        ) : (
-          <p className="mt-1 text-muted">
-            Choisissez d’abord une offre pour cibler le coaching.
-          </p>
-        )}
+        <p className="mt-1 text-muted">
+          Choisissez l’offre ciblée, déverrouillez le coach avec votre email,
+          puis lancez l’analyse et le CV.
+        </p>
 
         <ol className="mt-6 space-y-3">
           {STEPS.map((step, i) => (
@@ -80,11 +77,8 @@ export default async function CoachPage({
         <div className="mt-6">
           <CoachLive
             personaId={persona.id}
-            offer={
-              offer
-                ? { id: offer.id, title: offer.title, company: offer.company }
-                : null
-            }
+            offers={offers}
+            initialOfferId={offerId}
           />
         </div>
 

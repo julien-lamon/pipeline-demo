@@ -10,11 +10,14 @@ type OfferRef = { id: string; title: string; company: string };
 
 export function CoachLive({
   personaId,
-  offer,
+  offers,
+  initialOfferId,
 }: {
   personaId: string;
-  offer: OfferRef | null;
+  offers: OfferRef[];
+  initialOfferId?: string;
 }) {
+  const [offerId, setOfferId] = useState(initialOfferId ?? offers[0]?.id ?? "");
   const [gated, setGated] = useState(false);
   const [analysis, setAnalysis] = useState<Analysis | null>(null);
   const [cv, setCv] = useState<TailoredCV | null>(null);
@@ -26,6 +29,16 @@ export function CoachLive({
       if (localStorage.getItem("coach_gated") === "1") setGated(true);
     } catch {}
   }, []);
+
+  const offer = offers.find((o) => o.id === offerId);
+
+  function changeOffer(id: string) {
+    setOfferId(id);
+    // Les résultats portaient sur l'offre précédente : on repart propre.
+    setAnalysis(null);
+    setCv(null);
+    setError(null);
+  }
 
   async function run(kind: "analyze" | "cv") {
     if (!offer) return;
@@ -61,49 +74,62 @@ export function CoachLive({
     }
   }
 
-  if (!offer) {
+  if (offers.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-surface p-5 text-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/visuels/spot-etat-vide.svg"
-          alt=""
-          className="mx-auto w-full max-w-xs"
-        />
-        <p className="mt-2 text-sm text-muted">
-          Choisissez d’abord une offre dans la liste pour cibler le coaching.
-        </p>
-      </div>
+      <p className="rounded-2xl border border-dashed border-border bg-surface p-5 text-sm text-muted">
+        Aucune offre disponible pour ce profil.
+      </p>
     );
-  }
-
-  if (!gated) {
-    return <EmailGate onUnlock={() => setGated(true)} />;
   }
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={() => run("analyze")}
-          disabled={loading !== null}
-          className="rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+      {/* Sélecteur d'offre : l'écran est autonome, quel que soit le chemin d'arrivée */}
+      <label className="block rounded-2xl border border-border bg-card p-4">
+        <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
+          Offre ciblée
+        </span>
+        <select
+          value={offerId}
+          onChange={(e) => changeOffer(e.target.value)}
+          className="mt-2 w-full rounded-xl border border-border bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
         >
-          {loading === "analyze" ? "Analyse en cours…" : "Analyser cette offre"}
-        </button>
-        <button
-          type="button"
-          onClick={() => run("cv")}
-          disabled={loading !== null}
-          className="rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {loading === "cv" ? "Génération en cours…" : "Générer le CV ciblé"}
-        </button>
-      </div>
+          {offers.map((o) => (
+            <option key={o.id} value={o.id}>
+              {o.title} · {o.company}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* Captation d'email : déverrouille les deux actions live */}
+      {!gated ? (
+        <EmailGate onUnlock={() => setGated(true)} />
+      ) : (
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => run("analyze")}
+            disabled={loading !== null}
+            className="rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading === "analyze"
+              ? "Analyse en cours…"
+              : "Analyser cette offre"}
+          </button>
+          <button
+            type="button"
+            onClick={() => run("cv")}
+            disabled={loading !== null}
+            className="rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading === "cv" ? "Génération en cours…" : "Générer le CV ciblé"}
+          </button>
+        </div>
+      )}
 
       {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-accent-strong">
           {error}
         </div>
       )}
