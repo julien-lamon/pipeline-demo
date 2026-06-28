@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CVPreview } from "@/components/CVPreview";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -19,25 +20,24 @@ export default async function CVPage({
       <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">CV cible</h1>
+            <h1 className="text-2xl font-bold tracking-tight">CV d’origine</h1>
             <p className="mt-1 text-sm text-muted">
-              Exemple : en version live, ce CV serait généré pour l’offre choisie.
-              Format {cv.pages === 1 ? "1 page" : "2 pages"}, lisible ATS.
+              Le CV de base du profil, sans adaptation à une offre. Format{" "}
+              {cv.pages === 1 ? "1 page" : "2 pages"}, lisible ATS.
             </p>
           </div>
-          <button
-            type="button"
-            disabled
-            className="cursor-not-allowed rounded-xl border border-border bg-surface px-4 py-2 text-sm font-semibold text-muted"
-            aria-disabled
-            title="Disponible en version live"
+          <Link
+            href={`/p/${personaId}/coach`}
+            className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-strong"
           >
-            ↓ Télécharger (version live)
-          </button>
+            Générer un CV ciblé pour comparer
+          </Link>
         </div>
 
-        <div className="mt-3 rounded-xl border border-dashed border-accent/40 bg-accent-soft px-4 py-2 text-sm text-accent-strong">
-          Aperçu statique. Aucune génération réelle dans cette démo.
+        <div className="mt-3 rounded-xl border border-dashed border-border bg-surface px-4 py-2 text-sm text-muted">
+          Référence non optimisée. Le coach en produit une version repriorisée
+          pour l’offre choisie : comparez l’accroche, l’ordre des compétences et
+          les expériences remontées.
         </div>
 
         <div className="mt-5">

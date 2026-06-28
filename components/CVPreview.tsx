@@ -3,8 +3,8 @@ import type { CV } from "@/lib/types";
 export function CVPreview({ cv }: { cv: CV }) {
   return (
     <article className="rounded-2xl border border-border bg-white p-6 text-sm leading-relaxed shadow-sm sm:p-8">
-      <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-strong">
-        <span aria-hidden>✂</span> Taillé pour : {cv.tailoredFor}
+      <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1 text-xs font-semibold text-muted ring-1 ring-border">
+        CV d’origine (non optimisé)
       </div>
 
       <header className="border-b border-border pb-4">
