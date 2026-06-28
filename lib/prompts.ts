@@ -1,7 +1,8 @@
-// Construction des prompts des deux actions live. Le document de vérité (avec ses
-// lignes rouges) et le CV de référence sont la SEULE source de faits autorisée.
+// Construction des prompts des deux actions live. Le DOCUMENT DE VÉRITÉ (avec ses
+// lignes rouges) est l'UNIQUE source de faits autorisée, pour l'analyse comme
+// pour le CV. Le CV statique n'entre jamais dans le prompt.
 
-import type { CV, Offer } from "./types";
+import type { Offer } from "./types";
 
 function offerBlock(offer: Offer): string {
   return [
@@ -41,27 +42,30 @@ export function buildAnalyzePrompt(truth: string, offer: Offer) {
   return { system, user };
 }
 
-export function buildCvPrompt(truth: string, baseCv: CV, offer: Offer) {
+export function buildCvPrompt(truth: string, offer: Offer) {
   const system = [
     "Tu es un coach qui adapte un CV à une offre précise, en français.",
-    "On te donne le DOCUMENT DE VÉRITÉ du profil, son CV DE RÉFÉRENCE (faits avérés) et une OFFRE.",
-    "Produis une version du CV REPRIORISÉE et REFORMULÉE POUR cette offre :",
-    "accroche (`summary`) réécrite pour la cible, compétences réordonnées (`highlightedSkills`),",
-    "expériences pertinentes remontées et reformulées (verbes d'action, faits chiffrés du profil).",
+    "On te donne le DOCUMENT DE VÉRITÉ du profil (son UNIQUE source de faits) et une OFFRE.",
+    "Construis un CV complet À PARTIR DU SEUL DOCUMENT DE VÉRITÉ, repriorisé et reformulé",
+    "POUR cette offre :",
+    "- `name`, `title`, `contact` (email, ville, linkedin) : repris du document de vérité ;",
+    "- `summary` : accroche réécrite pour la cible ;",
+    "- `highlightedSkills` : compétences du profil réordonnées, les plus pertinentes d'abord ;",
+    "- `experiences` : expériences pertinentes remontées et reformulées (verbes d'action,",
+    "  faits chiffrés du profil) ;",
+    "- `education`, `languages`, `certifications` : repris du document de vérité.",
     "",
-    "RÈGLE ABSOLUE — NON NÉGOCIABLE :",
-    "n'invente JAMAIS une compétence, expérience, diplôme ou chiffre absent du document de vérité",
-    "ou du CV de référence. Tu réordonnes et reformules des faits existants, tu n'en crées pas.",
-    "Si l'offre exige quelque chose que le profil n'a pas, ne le fabrique pas : liste-le dans",
-    "`missingForOffer`. `tailoredFor` doit reprendre l'intitulé exact de l'offre.",
+    "RÈGLE ABSOLUE, NON NÉGOCIABLE :",
+    "n'invente JAMAIS une compétence, expérience, diplôme, certification, langue ou chiffre",
+    "absent du document de vérité. Tu réordonnes et reformules des faits existants, tu n'en",
+    "crées pas. Si l'offre exige quelque chose que le profil n'a pas, ne le fabrique pas :",
+    "liste-le dans `missingForOffer`. `tailoredFor` doit reprendre l'intitulé exact de l'offre.",
+    "N'emploie jamais de tiret long (cadratin ou demi-cadratin) ; utilise le trait d'union simple (-).",
   ].join("\n");
 
   const user = [
-    "# Document de vérité du profil",
+    "# Document de vérité du profil (source unique)",
     truth.trim(),
-    "",
-    "# CV de référence (faits avérés — ne pas dépasser)",
-    JSON.stringify(baseCv, null, 2),
     "",
     "# Offre cible",
     offerBlock(offer),

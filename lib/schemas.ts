@@ -70,15 +70,32 @@ export interface TailoredExperience {
   bullets: string[];
 }
 
-export interface TailoredCV {
+export interface TailoredEducation {
   title: string;
+  school: string;
+  year: string;
+}
+
+export interface TailoredContact {
+  email: string;
+  city: string;
+  linkedin: string;
+}
+
+export interface TailoredCV {
+  name: string;
+  title: string;
+  contact: TailoredContact;
   summary: string;
   tailoredFor: string;
   /** Compétences réordonnées/priorisées pour l'offre (issues du profil). */
   highlightedSkills: string[];
   /** Expériences pertinentes remontées et reformulées (sans rien inventer). */
   experiences: TailoredExperience[];
-  /** Ce que l'offre demande et que le profil n'a pas — signalé, pas fabriqué. */
+  education: TailoredEducation[];
+  languages: string[];
+  certifications: string[];
+  /** Ce que l'offre demande et que le profil n'a pas : signalé, pas fabriqué. */
   missingForOffer: string[];
 }
 
@@ -86,7 +103,18 @@ export const CV_SCHEMA = {
   type: "object",
   additionalProperties: false,
   properties: {
+    name: { type: "string" },
     title: { type: "string" },
+    contact: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        email: { type: "string" },
+        city: { type: "string" },
+        linkedin: { type: "string" },
+      },
+      required: ["email", "city", "linkedin"],
+    },
     summary: { type: "string" },
     tailoredFor: { type: "string" },
     highlightedSkills: { type: "array", items: { type: "string" } },
@@ -104,14 +132,34 @@ export const CV_SCHEMA = {
         required: ["role", "company", "period", "bullets"],
       },
     },
+    education: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          title: { type: "string" },
+          school: { type: "string" },
+          year: { type: "string" },
+        },
+        required: ["title", "school", "year"],
+      },
+    },
+    languages: { type: "array", items: { type: "string" } },
+    certifications: { type: "array", items: { type: "string" } },
     missingForOffer: { type: "array", items: { type: "string" } },
   },
   required: [
+    "name",
     "title",
+    "contact",
     "summary",
     "tailoredFor",
     "highlightedSkills",
     "experiences",
+    "education",
+    "languages",
+    "certifications",
     "missingForOffer",
   ],
 } as const;

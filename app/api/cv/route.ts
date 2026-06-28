@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { callStructured, ClaudeRefusalError } from "@/lib/anthropic";
 import { EFFORT, MAX_TOKENS } from "@/lib/config";
-import { getCV, getOffer, getPersona } from "@/lib/data";
+import { getOffer, getPersona } from "@/lib/data";
 import { checkAccess } from "@/lib/guards";
 import { getProfilDoc } from "@/lib/profil";
 import { buildCvPrompt } from "@/lib/prompts";
@@ -26,15 +26,15 @@ export async function POST(req: NextRequest) {
   } | null;
   const persona = getPersona(String(body?.personaId));
   const offer = persona ? getOffer(persona.id, String(body?.offerId)) : undefined;
-  const baseCv = persona ? getCV(persona.id) : undefined;
-  if (!persona || !offer || !baseCv) {
+  if (!persona || !offer) {
     return NextResponse.json(
-      { error: "Profil, offre ou CV inconnu." },
+      { error: "Profil ou offre inconnu." },
       { status: 400 },
     );
   }
 
-  const { system, user } = buildCvPrompt(getProfilDoc(persona.id), baseCv, offer);
+  // Source UNIQUE = document de vérité (+ offre). Le CV statique n'entre jamais ici.
+  const { system, user } = buildCvPrompt(getProfilDoc(persona.id), offer);
 
   try {
     const { data, cost } = await callStructured<TailoredCV>({
