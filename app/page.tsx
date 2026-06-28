@@ -11,13 +11,13 @@ const STEPS = [
   },
   {
     n: "2",
-    title: "Coaching ciblé",
-    desc: "Le coach analyse l’offre qui compte.",
+    title: "CV d’origine",
+    desc: "Le CV de base du candidat, avant adaptation.",
   },
   {
     n: "3",
-    title: "CV cible",
-    desc: "Un CV taillé pour l’intitulé visé.",
+    title: "Coaching ciblé",
+    desc: "Le coach analyse l’offre et génère le CV taillé.",
   },
 ];
 

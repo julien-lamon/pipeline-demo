@@ -6,8 +6,8 @@ type Step = "offres" | "coach" | "cv";
 
 const STEPS: { key: Step; label: string }[] = [
   { key: "offres", label: "Veille scorée" },
+  { key: "cv", label: "CV d’origine" },
   { key: "coach", label: "Coaching" },
-  { key: "cv", label: "CV cible" },
 ];
 
 export function SiteHeader({
