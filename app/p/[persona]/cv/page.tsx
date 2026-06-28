@@ -21,7 +21,7 @@ export default async function CVPage({
           <div>
             <h1 className="text-2xl font-bold tracking-tight">CV cible</h1>
             <p className="mt-1 text-sm text-muted">
-              Exemple — en version live, ce CV serait généré pour l’offre choisie.
+              Exemple : en version live, ce CV serait généré pour l’offre choisie.
               Format {cv.pages === 1 ? "1 page" : "2 pages"}, lisible ATS.
             </p>
           </div>
@@ -37,7 +37,7 @@ export default async function CVPage({
         </div>
 
         <div className="mt-3 rounded-xl border border-dashed border-accent/40 bg-accent-soft px-4 py-2 text-sm text-accent-strong">
-          Aperçu statique — aucune génération réelle dans cette démo.
+          Aperçu statique. Aucune génération réelle dans cette démo.
         </div>
 
         <div className="mt-5">

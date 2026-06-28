@@ -1,4 +1,4 @@
-# Document de vérité — Sacha O. (fictif)
+# Document de vérité : Sacha O. (fictif)
 
 > Source de référence figée pour le persona. En version live, c'est ce document
 > que le coach lirait avant d'adapter le CV à une offre. Données 100% fictives.
@@ -35,6 +35,6 @@ A/B testing · Marketing automation · Pilotage budgétaire.
 - **Présentiel intégral (5 jours sur site)** : refusé. Le profil exige a minima de
   l'hybride ou du télétravail.
 - **Poste à dominante community management / contenu pur** : sous le niveau acquisition
-  visé, trop junior — exclu comme activité principale.
+  visé, trop junior : exclu comme activité principale.
 - **Organisation hors croissance / secteur traditionnel sous-investi** : refus des
   structures sans dynamique d'investissement marketing.

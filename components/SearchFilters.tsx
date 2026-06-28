@@ -43,7 +43,7 @@ export function SearchFilters() {
           </span>
         ))}
         <span className="ml-1 text-[11px] text-muted/70">
-          (filtres décoratifs — démo)
+          (filtres décoratifs, démo)
         </span>
       </div>
     </div>

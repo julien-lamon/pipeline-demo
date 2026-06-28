@@ -58,7 +58,7 @@ function Block({
         {title}
       </p>
       {items.length === 0 ? (
-        <p className="mt-2 text-sm text-muted">—</p>
+        <p className="mt-2 text-sm text-muted">Aucun</p>
       ) : (
         <ul className="mt-2 space-y-1 text-sm text-foreground/90">
           {items.map((it, i) => (

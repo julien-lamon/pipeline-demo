@@ -1,4 +1,4 @@
-# Document de vérité — Camille D. (fictif)
+# Document de vérité : Camille D. (fictif)
 
 > Source de référence figée pour le persona. En version live, c'est ce document
 > que le coach lirait avant d'adapter le CV à une offre. Données 100% fictives.

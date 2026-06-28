@@ -1,35 +1,43 @@
 @import "tailwindcss";
 
+/* Charte visuelle job-pipeline (public/visuels/charte/CHARTE-VISUELLE.md).
+   Règle 70 / 20 / 10 : blanc + gris chauds + un seul point chaud corail. */
 :root {
+  /* 70 : blanc + surface chaude */
   --background: #ffffff;
-  --surface: #fafaf9;
-  --foreground: #18181b;
-  --muted: #6b7280;
+  --surface: #faf8f5;
   --card: #ffffff;
-  --border: #ececef;
+  --border: #ece8e2;
 
-  /* Couleur d'accent du thème — corail chaud, volontairement distinct du jaune
-     WTTJ (#FFCD00). Modifiable ici : tout le funnel s'aligne sur ces variables. */
+  /* 20 : gris chauds (remplacent les gris froids) */
+  --foreground: #2e2a26; /* ink : titres */
+  --muted: #6b645c; /* ink-soft : texte courant */
+  --ink-faint: #8a8278; /* labels, légendes */
+  --fill-warm: #bcb4a8; /* aplat des illustrations */
+
+  /* 10 : point chaud corail (inchangé, charte) */
   --accent: #f2552d;
   --accent-strong: #d8401b;
   --accent-soft: #fff1ec;
 
-  /* Niveaux de score */
+  /* Niveaux de score (neutre bas réchauffé) */
   --score-high: #15803d;
   --score-high-soft: #ecfdf3;
   --score-mid: #b45309;
   --score-mid-soft: #fff7ed;
-  --score-low: #6b7280;
-  --score-low-soft: #f4f4f5;
+  --score-low: #8a8278;
+  --score-low-soft: #f3f1ec;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
   --color-card: var(--card);
   --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-fill-warm: var(--fill-warm);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
@@ -46,4 +54,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+/* Titres généreux (charte §4) */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
 }

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140" width="560" height="140" role="img" aria-label="État vide : tout est à jour">
+  <rect x="180" y="26" width="200" height="92" rx="14" fill="#faf8f5" stroke="#ece8e2" stroke-width="1.5" stroke-dasharray="4 6"></rect>
+  <circle cx="280" cy="66" r="22" fill="#fff1ec"></circle>
+  <path d="M270,66 l7,7 l13,-16" fill="none" stroke="#f2552d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+  <rect x="250" y="98" width="60" height="6" rx="3" fill="#e4ded6"></rect>
+</svg>

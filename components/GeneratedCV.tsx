@@ -6,13 +6,13 @@ function renderHtml(cv: TailoredCV): string {
   const xp = cv.experiences
     .map(
       (e) =>
-        `<section><h3>${e.role} — ${e.company} <span>${e.period}</span></h3><ul>${e.bullets
+        `<section><h3>${e.role}, ${e.company} <span>${e.period}</span></h3><ul>${e.bullets
           .map((b) => `<li>${b}</li>`)
           .join("")}</ul></section>`,
     )
     .join("");
   return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${cv.title}</title>
-<style>body{font-family:Inter,Arial,sans-serif;max-width:760px;margin:2rem auto;color:#18181b;line-height:1.5}
+<style>body{font-family:Inter,Arial,sans-serif;max-width:760px;margin:2rem auto;color:#2e2a26;line-height:1.5}
 h1{margin:0}h2{color:#d8401b;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;margin:1.4rem 0 .4rem}
 section h3 span{float:right;color:#6b7280;font-weight:400}ul{margin:.2rem 0 .8rem 1.1rem}.badge{display:inline-block;background:#fff1ec;color:#d8401b;padding:.2rem .6rem;border-radius:999px;font-size:.75rem;font-weight:600}</style></head>
 <body><div class="badge">Taillé pour : ${cv.tailoredFor}</div><h1>${cv.title}</h1>

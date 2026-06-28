@@ -13,8 +13,8 @@ import {
 } from "@/lib/data";
 
 const PISTE_LABEL: Record<string, string> = {
-  A: "Piste A — court terme",
-  B: "Piste B — positionnement",
+  A: "Piste A, court terme",
+  B: "Piste B, positionnement",
 };
 
 export default async function OfferDetailPage({

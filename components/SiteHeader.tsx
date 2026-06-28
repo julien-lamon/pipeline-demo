@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Persona } from "@/lib/types";
 
@@ -25,9 +26,13 @@ export function SiteHeader({
             href="/"
             className="flex items-center gap-2 rounded-full border border-border px-3 py-1 text-sm transition hover:border-accent/50"
           >
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-xs font-bold text-accent-strong">
-              {persona.initials}
-            </span>
+            <Image
+              src={`/visuels/avatar-${persona.id}.jpg`}
+              alt=""
+              width={24}
+              height={24}
+              className="h-6 w-6 rounded-full object-cover"
+            />
             <span className="font-medium">{persona.name}</span>
             <span className="text-muted">· changer</span>
           </Link>
@@ -85,11 +90,6 @@ function FunnelNav({ personaId, active }: { personaId: string; active: Step }) {
                 </span>
                 {step.label}
               </Link>
-              {i < STEPS.length - 1 && (
-                <span className="text-border" aria-hidden>
-                  —
-                </span>
-              )}
             </li>
           );
         })}

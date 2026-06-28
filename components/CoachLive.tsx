@@ -63,8 +63,16 @@ export function CoachLive({
 
   if (!offer) {
     return (
-      <div className="rounded-2xl border border-dashed border-border bg-surface p-5 text-sm text-muted">
-        Choisissez d’abord une offre dans la liste pour cibler le coaching.
+      <div className="rounded-2xl border border-dashed border-border bg-surface p-5 text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/visuels/spot-etat-vide.svg"
+          alt=""
+          className="mx-auto w-full max-w-xs"
+        />
+        <p className="mt-2 text-sm text-muted">
+          Choisissez d’abord une offre dans la liste pour cibler le coaching.
+        </p>
       </div>
     );
   }
