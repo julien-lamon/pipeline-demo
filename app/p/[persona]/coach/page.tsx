@@ -98,7 +98,7 @@ export default async function CoachPage({
             href={`/p/${personaId}/cv`}
             className="inline-flex items-center gap-2 rounded-xl border border-accent px-5 py-3 font-semibold text-accent-strong transition hover:bg-accent-soft"
           >
-            Voir le CV cible (exemple statique) →
+            Voir le CV d’origine (non optimisé) →
           </Link>
         </div>
       </main>
