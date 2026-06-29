@@ -1,123 +1,112 @@
 # job-pipeline-demo
 
-Démo web vitrine du projet **job-pipeline** : elle fait comprendre, en moins de
-trois minutes et sans inscription, le funnel **veille scorée → coaching ciblé →
-CV taillé pour l'offre**.
+> Démonstration interactive d'un assistant de recherche d'emploi : il trie des
+> offres par pertinence, analyse une candidature, et génère un CV et une lettre de
+> motivation **adaptés à l'offre visée** — sans que le candidat ait à réécrire quoi
+> que ce soit.
 
-> ⚠️ **Données 100% fictives et figées.** Les trois personas, leurs offres et
-> leurs CV sont inventés ; **aucune vraie donnée, aucune offre scrapée**. Les
-> écrans de veille (accueil, offres, détail) ne font **aucun appel réseau**.
->
-> 🤖 **Le coach est live.** Les boutons « Analyser cette offre » et « Générer le
-> CV ciblé » déclenchent de **vrais appels Claude**, via des routes serveur qui
-> seules détiennent la clé API (jamais exposée au client). Accès filtré par email
-> gating, dépense plafonnée. Voir [Coach live](#coach-live-appels-claude-réels).
+Démo en ligne : _à renseigner après le premier déploiement Vercel_ (voir
+[`docs/DECISIONS.md`](docs/DECISIONS.md) D23 — la mise en prod est cadrée comme un lot dédié).
 
-## Stack
+---
 
-- [Next.js](https://nextjs.org) 16 (App Router) + TypeScript
-- Tailwind CSS v4
-- Déployable sur Vercel en zéro-config
+## Le problème
 
-## Lancer la démo en local
+Postuler, c'est répéter trois tâches chronophages pour chaque offre : juger si le
+poste vaut la candidature, adapter son CV au vocabulaire de l'annonce, et rédiger une
+lettre qui ne soit pas un copier-coller. La plupart des outils automatisent l'une de
+ces étapes ; aucun ne relie la **veille scorée** au **coaching taillé pour le poste
+exact**.
+
+Cette démo montre ce chaînage de bout en bout, sur trois profils fictifs de secteurs
+différents.
+
+## Ce que fait la démo
+
+Le visiteur incarne l'un des trois personas, parcourt ses offres déjà scorées, en
+ouvre une, et déclenche le coaching :
+
+1. **Analyse de l'offre** — une analyse écrite en direct (diffusée mot à mot) qui
+   sépare deux questions : l'adéquation mesurable du dossier (score ATS) et son
+   *positionnement* qualitatif. Elle signale aussi les « lignes rouges » du profil
+   que l'offre pourrait heurter.
+2. **CV ciblé** — un CV reformulé et repriorisé pour l'offre (jamais inventé : le
+   socle de vérité ne bouge pas), au format d'un CV moderne lisible par les ATS.
+3. **Lettre de motivation** — une lettre générée pour l'offre, éditable et copiable.
+
+Le tout est piloté **par boutons** : pas de zone de saisie libre.
+
+## Ce que le projet démontre
+
+- **Une vraie IA en production, encadrée.** L'analyse, le CV et la lettre sont
+  générés en direct par un modèle de langage — mais via un relais serveur qui protège
+  la clé, avec plafond de dépense, quotas et garde-fous anti-abus.
+- **Une conception orientée sécurité et RGPD.** Aucune saisie libre (surface
+  d'injection quasi nulle), données 100 % fictives, aucune donnée personnelle réelle
+  dans le dépôt.
+- **Un produit qui conseille sans mentir.** L'outil distingue *conseiller* (une
+  analyse lucide, qui n'enjolive pas les chances) et *exécuter* (une lettre qui plaide
+  la candidature, même quand le candidat choisit d'assumer un poste mal calibré). Il
+  ne dit pas oui à tout, et ne bloque pas pour autant.
+- **Une démarche tracée.** Les choix structurants — et leurs revirements — sont
+  consignés dans [`docs/DECISIONS.md`](docs/DECISIONS.md).
+
+## Les trois personas (fictifs)
+
+| Persona     | Secteur               | Séniorité |
+|-------------|-----------------------|-----------|
+| Camille D.  | Ressources humaines   | Junior    |
+| Sacha O.    | Marketing digital     | Confirmé  |
+| Claude R.   | Direction financière  | Senior    |
+
+Prénoms non genrés, initiale seule, pas de photo : un choix de neutralité (et un
+sous-texte « outil sans biais »). Chaque persona dispose d'un profil détaillé et de
+son propre jeu d'offres scorées.
+
+## Pile technique
+
+- Next.js 16.2.9 (App Router, Turbopack), React 19.2.4, TypeScript 5, Tailwind CSS 4
+- SDK `@anthropic-ai/sdk` 0.106.x ; modèle `claude-sonnet-4-6`
+- Routes serveur Next.js pour les appels au modèle (la clé reste côté serveur)
+- Déploiement Vercel (build zéro-config)
+- Store managé **Upstash Redis (REST)** via Vercel Marketplace pour les compteurs
+  (plafond, quotas, throttle) — variables `KV_REST_API_URL` / `KV_REST_API_TOKEN`
+
+## Lancer en local
 
 ```bash
-npm install                 # installe les dépendances (dont @anthropic-ai/sdk)
-cp .env.example .env.local  # puis renseigner ANTHROPIC_API_KEY
+npm install
 npm run dev
+# → http://localhost:3000
 ```
 
-Puis ouvrir **http://localhost:3000**. Les écrans de veille tournent sans clé ;
-seul le coach live (écran 4) requiert `ANTHROPIC_API_KEY`.
+Pour exécuter le coaching en local, une clé API est requise dans `.env.local`
+(`ANTHROPIC_API_KEY=…` ; copier `.env.example`). Sans elle, les écrans de veille
+fonctionnent ; les actions de coaching nécessitent la clé. En local sans store managé,
+les compteurs basculent sur un fichier `.data/store.json` (dev uniquement, non versionné).
 
-## Coach live (appels Claude réels)
+## Comment c'est construit
 
-Deux actions **full-bouton** (aucune saisie de texte libre côté visiteur) sur
-l'écran coach, à partir d'une offre figée déjà choisie :
+- **Veille figée.** Les offres et leurs scores sont calculés une fois puis figés :
+  la démo est déterministe et ne coûte rien à servir. La règle de scoring (inspirée
+  du fonctionnement réel des ATS) est documentée dans
+  [`docs/scoring-ats.md`](docs/scoring-ats.md).
+- **Coaching live.** Seules les trois actions de coaching appellent le modèle, via le
+  relais serveur, dans la limite des garde-fous.
+- **Méthode de coaching.** Le coaching transpose — sans la copier — la méthode d'un
+  coach emploi senior ; le périmètre repris et omis est documenté dans
+  [`docs/coaching-methode.md`](docs/coaching-methode.md).
 
-1. **Analyser cette offre** → adéquation profil/offre + signalement explicite des
-   **lignes rouges** heurtées (encart dédié).
-2. **Générer le CV ciblé** → CV repriorisé/reformulé **pour l'offre**, sans rien
-   inventer ; ce que l'offre exige et que le profil n'a pas est listé, pas fabriqué.
+## Limites assumées
 
-**Comment la clé est protégée.** Le navigateur n'appelle **jamais** l'API
-Anthropic en direct : il appelle nos routes serveur (`app/api/analyze`,
-`app/api/cv`, `app/api/gate`), qui lisent `ANTHROPIC_API_KEY` depuis
-l'environnement serveur. La clé n'est ni dans le code, ni dans le bundle client,
-ni committée (`.env.local` est gitignoré ; en prod, variable Vercel).
+C'est une **démonstration**, pas un produit commercial : données fictives, offres
+figées, pas de comptes utilisateurs. Une version vivante (offres réelles via API
+officielles, comptes de testeurs invités) est esquissée dans
+[`docs/DECISIONS.md`](docs/DECISIONS.md).
 
-**Modèle & appel.** `claude-sonnet-4-6`, sortie structurée (`output_config.format`
-+ JSON Schema → format garanti, pas de parsing fragile), `effort` bas/medium,
-`thinking` désactivé, `max_tokens` borné. Coût observé : ~0,009 €/analyse,
-~0,014 €/CV.
+## Documentation
 
-**Garde-fous de dépense.** Plafond **global 10 €/jour** (au-delà : coupure propre,
-« démo à pleine capacité ») + **quota par email** (10 actions/jour par défaut).
-Compteurs dans **Vercel KV** (`KV_REST_API_URL` + `KV_REST_API_TOKEN`) ; sans ces
-variables, fallback fichier `.data/store.json` (dev uniquement). Réglables via
-`DAILY_BUDGET_EUR` et `PER_EMAIL_DAILY_QUOTA`.
-
-**Email gating (RGPD allégé).** Avant la 1ʳᵉ action, le visiteur saisit un email
-et coche un consentement explicite (mention RGPD : finalité, pas de revente, droit
-à l'effacement). On stocke **uniquement** : email + horodatage + finalité. Aucun CV
-visiteur, aucun contenu personnel.
-
-**Clé perso d'un testeur (documenté, pas d'UI).** Un testeur technique peut faire
-tourner la démo en local avec **sa propre clé** : `cp .env.example .env.local`,
-renseigner `ANTHROPIC_API_KEY`, `npm run dev`. Il n'existe **volontairement aucun**
-champ « collez votre clé » dans l'interface publique (mauvaise pratique de
-sécurité) — la clé passe exclusivement par l'environnement serveur.
-
-> **En production (Vercel) :** définir `ANTHROPIC_API_KEY` et les variables KV dans
-> Project Settings → Environment Variables. Sans store KV, les plafonds ne
-> persistent pas entre invocations serverless.
-
-## Parcours (5 écrans)
-
-1. **Accueil** (`/`) — pitch + choix d'un des 3 profils à incarner.
-2. **Offres scorées** (`/p/[persona]/offres`) — liste triée par score, badges
-   colorés par niveau, marquage *prioritaire* / *sous le seuil*, recherche et
-   filtres décoratifs.
-3. **Détail offre** (`/p/[persona]/offres/[offerId]`) — score ATS, positionnement
-   sur l'offre (5 niveaux), piste A/B, annonce intégrale + bouton *Coacher*.
-4. **Coach** (`/p/[persona]/coach`) — **stub** : explique ce que fera le coach
-   live, CTA désactivé, aucun appel réel.
-5. **CV cible** (`/p/[persona]/cv`) — aperçu **statique** d'un CV d'exemple,
-   étiqueté « exemple », bouton de téléchargement décoratif.
-
-## Personas (fictifs)
-
-| Profil | Secteur | Séniorité | Offres | CV d'exemple |
-| --- | --- | --- | --- | --- |
-| Camille D. | Ressources humaines | Junior (~2 ans) | 5 | 1 page |
-| Sacha O. | Marketing digital | Confirmé (~6 ans) | 5 | 1 page |
-| Claude R. | Direction financière | Senior (12+ ans) | 5 | 2 pages |
-
-## Structure
-
-```
-app/
-  page.tsx                       # Accueil + choix persona
-  p/[persona]/offres/            # Liste + détail des offres
-  p/[persona]/coach/             # Stub de coaching
-  p/[persona]/cv/                # Aperçu CV statique
-components/                      # Cartes, badges, header funnel, CV…
-data/
-  personas.json                  # Les 3 personas
-  offers/{rh,marketing,finance}.json
-  cv/{camille,sacha,claude}.json
-content/profil-*.md              # "Documents de vérité" par persona
-lib/                             # Types + accès aux données figées
-```
-
-## Thème
-
-La couleur d'accent est une variable de thème (`--accent` dans
-`app/globals.css`), volontairement distincte du jaune de Welcome to the Jungle.
-La modifier met tout le funnel à jour.
-
-## Périmètre
-
-Voir [`RULES.md`](RULES.md). Cette démo est la **coquille** (interface + parcours
-+ données figées). Le coaching live, le relais serverless détenant la clé API, le
-plafond de dépense et l'*email gating* sont **hors périmètre** ici.
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — journal des décisions stratégiques et techniques
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — architecture et flux de données
+- [`docs/scoring-ats.md`](docs/scoring-ats.md) — règle de scoring ATS
+- [`docs/coaching-methode.md`](docs/coaching-methode.md) — méthode de coaching transposée
