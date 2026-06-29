@@ -43,3 +43,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Outillage d'agent (contenu tiers, non lié au produit) — cf. docs/DECISIONS.md D24
+/.agents/
+/skills-lock.json
+
+# Briefs de travail internes (méthode AMO/MOE, hors vitrine pour l'instant)
+/brief-*.md
+
+# Sources de design non servies au runtime (réservoir local, hors /public)
+/design/
