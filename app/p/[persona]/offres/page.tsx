@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { OfferCard } from "@/components/OfferCard";
 import { SearchFilters } from "@/components/SearchFilters";
 import { SiteHeader } from "@/components/SiteHeader";
-import { getOffers, getPersona, PRIORITY_MIN, SCORE_THRESHOLD } from "@/lib/data";
+import { getOffers, getPersona } from "@/lib/data";
 
 export default async function OffresPage({
   params,
@@ -24,8 +24,9 @@ export default async function OffresPage({
             Offres scorées · {persona.sector}
           </h1>
           <p className="mt-1 text-muted">
-            {offers.length} offres triées par score. Seuil de pertinence à{" "}
-            {SCORE_THRESHOLD}/100 ; offres prioritaires à partir de {PRIORITY_MIN}.
+            {offers.length} offres d’emploi triées par score. Cliquez sur l’une
+            d’entre elles pour lancer le coach et voir comment Pipeline aide les
+            candidats à y répondre.
           </p>
         </header>
 

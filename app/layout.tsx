@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pipeline : veille scorée, coaching ciblé, CV taillé pour l'offre",
+  title: "Pipeline : veille scorée, coaching ciblé, CV optimisé pour l'offre",
   description:
-    "Démo vitrine du funnel : veille d'offres scorée par IA, coaching ciblé et CV taillé pour l'offre choisie. Données 100% fictives.",
+    "Démo vitrine du funnel : veille d'offres scorée par IA, coaching ciblé et CV optimisé pour l'offre choisie. Données 100% fictives.",
 };
 
 export default function RootLayout({

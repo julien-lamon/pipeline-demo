@@ -76,7 +76,7 @@ export function GeneratedCV({
     <div className="space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span className="inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-strong">
-          Taillé pour : {cv.tailoredFor}
+          Optimisé pour : {cv.tailoredFor}
         </span>
         <button
           type="button"

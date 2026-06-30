@@ -69,7 +69,7 @@ export function EmailGate({ onUnlock }: { onUnlock: () => void }) {
       <button
         type="submit"
         disabled={busy || !consent}
-        className="mt-4 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-4 rounded-xl bg-accent px-6 py-3 text-lg font-bold text-white transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-50"
       >
         {busy ? "Validation…" : "Débloquer le coach"}
       </button>

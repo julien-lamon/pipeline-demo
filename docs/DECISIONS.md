@@ -324,7 +324,43 @@ skill tierce est lue avant usage (elle s'exécute avec les pleins droits de l'ag
 
 ---
 
-## 11. Décisions en attente et dette tracée
+## 11. Itérations UX post-lancement
+
+### D25 — Passe UX/accessibilité post-audit (30 juin 2026)
+**Décision.** À l'issue d'un audit design (accessibilité, performance, responsive, theming,
+anti-patterns ; score 14/20), appliquer une passe de raffinements UX **sans toucher à
+l'identité visuelle**, et **assumer** les écarts de contraste WCAG plutôt que dénaturer la
+charte.
+**Ce qui a changé.**
+- *Accueil :* libellé « Choisissez un profil » promu en titre + sous-titre explicatif ;
+  pastille hero reformulée (« Profils fictifs · lancez l'IA pour tester en direct ») pour
+  dissocier *données fictives* et *moteur réel*.
+- *Vocabulaire :* « taillé » → « optimisé » partout ; séquence du pipeline corrigée
+  (Analyse → CV → Lettre, l'étape fictive « Dialogue ciblé » supprimée) ; consigne d'action
+  ajoutée sous le titre de la liste d'offres.
+- *Fiche offre :* CTA « Coacher pour ce poste » remonté en tête (visible au premier écran)
+  + rappel discret en bas, sur une page longue où l'action n'était atteignable qu'après
+  tout le scroll.
+- *Page CV d'origine :* recadrée en « matériau de départ » = deux cartes repliables jumelles,
+  le CV brut **et** le document de vérité (highlights *objectifs* + *lignes rouges* extraits
+  génériquement du markdown des trois profils ; document complet au clic).
+- *Avatars :* cercles uniformisés par recadrage CSS par persona (composant `Avatar`
+  centralisé) — les cercles dessinés dans les illustrations sources étaient incohérents
+  (Camille : anneau fin ; Claude : disque → double cercle ; Sacha : aucun).
+**Arbitrage clé — corail conservé.** L'audit a montré que le texte blanc sur le corail
+`#f2552d` (3,44:1) et le gris `ink-faint` (3,79:1) sont **sous le seuil WCAG AA** (4,5:1).
+Foncer le corail (testé à `#cf3c17`) le rendait terne. **Choix : garder la charte intacte**
+(site vitrine, pas applicatif), et n'agrandir que les **boutons hero isolés** (text-xl/lg
+gras) pour bénéficier de la règle WCAG « grand texte » (3:1). Les boutons en groupe et les
+petits aplats restent inchangés.
+**Écarté.** (a) Régénérer les avatars sur un spec unique (propre, mais imposait de nouveaux
+assets) — recadrage CSS préféré, sans dépendance ; (b) la correction complète des contrastes
+et de l'accessibilité clavier/modale — reportée (voir dette).
+**Statut.** Implémentée.
+
+---
+
+## 12. Décisions en attente et dette tracée
 
 **En attente d'arbitrage**
 - **Niveau « Très fort » jamais atteint.** Le calibrage strict fait qu'aucune offre
@@ -333,6 +369,10 @@ skill tierce est lue avant usage (elle s'exécute avec les pleins droits de l'ag
   rigueur à quatre crans visibles.
 
 **Dette tracée (sans action immédiate)**
+- **Accessibilité sous AA, assumée (vitrine).** Contraste texte-blanc sur corail (3,44:1) et
+  `ink-faint` (3,79:1) sous le seuil WCAG AA ; focus clavier des champs peu visible ; modale
+  d'analyse sans piège de focus ni `aria-live`. Non corrigé par choix (préserver la charte) —
+  à reprendre (passe `colorize` + `harden`) si le projet vise la conformité. Voir D25.
 - Calcul ATS par proxy : la formule de la skill n'est pas appliquée intégralement (pas de
   ré-extraction complète des mots-clés ; « partiel » non exploité). Voir D14.
 - ~~README de la démo périmé (décrit encore le coach comme un stub désactivé)~~ —

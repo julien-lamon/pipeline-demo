@@ -62,6 +62,19 @@ export default async function OfferDetailPage({
           ))}
         </div>
 
+        {/* CTA principal remonté : action visible dès le premier écran */}
+        <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <Link
+            href={`/p/${personaId}/coach?offer=${offer.id}`}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-lg font-bold text-white transition hover:bg-accent-strong"
+          >
+            Coacher pour ce poste →
+          </Link>
+          <span className="text-sm text-muted">
+            Analyse, CV et lettre générés en direct.
+          </span>
+        </div>
+
         {/* Axe ATS (proximité) — séparé des lignes rouges, qui sont du ressort du coach */}
         <section className="mt-6 rounded-2xl border border-border bg-card p-5">
           <h2 className="text-sm font-bold uppercase tracking-wider text-accent-strong">
@@ -132,7 +145,7 @@ export default async function OfferDetailPage({
         <div className="mt-6">
           <Link
             href={`/p/${personaId}/coach?offer=${offer.id}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-base font-semibold text-white transition hover:bg-accent-strong"
           >
             Coacher pour ce poste →
           </Link>

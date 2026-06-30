@@ -8,15 +8,15 @@ import { getProfilDoc } from "@/lib/profil";
 const STEPS = [
   {
     title: "Analyse de l’offre",
-    desc: "Le coach lit l’intitulé, les attendus et les mots-clés ATS de l’offre choisie.",
-  },
-  {
-    title: "Dialogue ciblé",
-    desc: "Il croise l’offre avec le document de vérité du profil et pose les bonnes questions.",
+    desc: "Le coach analyse en profondeur l’offre et la compare au profil et aux attentes du candidat.",
   },
   {
     title: "Génération du CV",
-    desc: "Il produit un CV taillé pour le poste, prêt à relire et à envoyer.",
+    desc: "Il produit un CV optimisé pour le poste, prêt à relire et à envoyer.",
+  },
+  {
+    title: "Création de la lettre de motivation",
+    desc: "Il rédige un texte court et adapté, directement modifiable par le candidat et prêt à copier-coller.",
   },
 ];
 

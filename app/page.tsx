@@ -12,12 +12,12 @@ const STEPS = [
   {
     n: "2",
     title: "CV d’origine",
-    desc: "Le CV de base du candidat, avant adaptation.",
+    desc: "Le CV et le profil de base, avec ses objectifs pro.",
   },
   {
     n: "3",
     title: "Coaching ciblé",
-    desc: "Le coach analyse l’offre et génère le CV taillé.",
+    desc: "Le coach analyse l’offre et génère le CV optimisé.",
   },
 ];
 
@@ -30,10 +30,10 @@ export default function Home() {
         <section className="grid items-center gap-10 lg:grid-cols-2">
           <div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-strong">
-              Démo · données fictives
+              Profils fictifs · lancez l’IA pour tester en direct
             </span>
             <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight md:text-5xl">
-              De la veille d’offres au CV taillé pour le poste.
+              De la veille d’offres au CV optimisé pour le poste.
             </h1>
             <p className="mt-4 max-w-md text-lg leading-relaxed text-muted">
               <span className="font-semibold text-accent-strong">Pipeline</span>{" "}
@@ -73,10 +73,17 @@ export default function Home() {
 
         {/* Sélection persona : vraies illustrations (1 par profil) */}
         <section className="mt-14">
-          <p className="text-sm font-medium text-ink-faint">
+          <h2 className="text-2xl font-bold tracking-tight">
             Choisissez un profil à incarner
+          </h2>
+          <p className="mt-2 max-w-3xl leading-relaxed text-muted">
+            Chaque profil vous fait vivre le parcours complet et voir comment{" "}
+            <span className="font-semibold text-accent-strong">Pipeline</span>{" "}
+            facilite la candidature : de la sélection des offres d’emploi à
+            l’optimisation du CV en fonction de l’offre, jusqu’à la rédaction de
+            la lettre de motivation.
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {personas.map((p) => (
               <PersonaCard key={p.id} persona={p} />
             ))}
